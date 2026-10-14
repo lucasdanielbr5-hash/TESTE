@@ -181,7 +181,7 @@ h3{font-size:14px!important}
 
 
 
-<script id="lqe-runtime-style-guard">(function(){try{const c=document.createElement.bind(document);document.createElement=function(tag,o){const e=c(tag,o);if(String(tag).toLowerCase()==='style')e.media='not all';return e};}catch(e){}})();</script>
+<!-- Corrigido: não bloquear estilos dinâmicos necessários aos módulos e modais. -->
 
   <!-- Ajustes finais de layout responsivo, navegação superior e prevenção de cortes -->
   <style id="lqe-full-system-layout-fixes">
@@ -234,7 +234,7 @@ h3{font-size:14px!important}
     @media print { body { overflow:visible!important; } #app .site-header, #app .topbar { display:none!important; } #app .main, #app .content, #app .view { height:auto!important; min-height:0!important; overflow:visible!important; } }
   </style>
 
-</head>
+
 
 <style id="lqe-complete-repair-style">
 /* Revisão global de layout: evita cortes, sobreposição e rolagem horizontal nas telas. */
@@ -335,6 +335,87 @@ button{overflow-wrap:anywhere}
  .card,.v3-panel,.rz-panel,.report-panel,table,tr{break-inside:avoid}
 }
 </style>
+
+<style id="lqe-final-repair-v2">
+  /* Estrutura única: navegação no topo, sem menu lateral ou cabeçalho preso à rolagem. */
+  #app .sidebar { display: none !important; }
+  #app .site-header {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 100;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  #app .site-header .brand { flex: 0 0 clamp(118px, 15vw, 190px); min-width: 0; }
+  #app .site-header .brand-mark { width: 100%; min-width: 0; }
+  #app .site-header .brand-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  #app .site-nav-wrap {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  #app .site-nav-wrap::-webkit-scrollbar { display: none; }
+  #app .site-header .nav {
+    display: flex;
+    width: max-content;
+    min-width: max-content;
+    max-width: none;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+  }
+  #app .site-header .nav button { flex: 0 0 auto; white-space: nowrap; line-height: 1.2; }
+  #app .site-header .nav button svg,
+  #app .site-header-actions svg,
+  #app .btn svg,
+  #app .icon-button svg { flex: 0 0 auto; }
+  #app .site-header-actions { display: flex; align-items: center; flex: 0 0 auto; min-width: 0; }
+  #app .site-header .side-bottom { margin: 0; padding: 0; border: 0; }
+  #app .main { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; min-height: 0; width: 100%; overflow: hidden; }
+  #app .content { flex: 1 1 auto; min-width: 0; min-height: 0; width: 100%; overflow: auto; overflow-x: hidden; overscroll-behavior: contain; }
+  #app .view { width: 100%; max-width: 1500px; min-width: 0; margin-inline: auto; }
+  #app .view img { max-width: 100%; }
+  #app .table-wrap, #app .table-responsive, #app .table-container,
+  #app .table-responsive, #app .v3-table, #app .final43-fin-table,
+  #app .final45-fin-table { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+  #app input, #app select, #app textarea { min-width: 0; max-width: 100%; }
+  #app .btn { max-width: 100%; }
+  #view-recados { display: none !important; }
+  @media (max-width: 760px) {
+    #app .site-header { flex-wrap: wrap; gap: 8px 12px; padding: 8px 12px; }
+    #app .site-header .brand { flex: 1 1 120px; width: auto; height: 38px; min-height: 38px; }
+    #app .site-header .brand-mark { width: min(130px, 100%); height: 38px; }
+    #app .site-header-actions { margin-left: auto; }
+    #app .site-nav-wrap { order: 3; flex: 1 0 100%; width: 100%; margin: 0; }
+    #app .site-header .nav { width: max-content; min-width: max-content; gap: 4px; }
+    #app .site-header .nav button { height: 38px; min-height: 38px; padding-inline: 10px; font-size: 11px; }
+    #app .topbar { height: auto; min-height: 48px; padding: 9px 12px; }
+    #app .content { padding: 18px 12px 28px; }
+    #app .dashboard-grid, #app .v3-two-col, #app .v3-agenda-layout { grid-template-columns: minmax(0, 1fr); }
+    #app .form-grid, #app .form-grid.two, #app .v3-form-grid,
+    #app .v4-grid, #app .final42-form-grid, #app .final44-eval-grid { grid-template-columns: minmax(0, 1fr); }
+    #app .full { grid-column: 1; }
+    #app .page-heading, #app .v3-head, #app .rz-head { align-items: flex-start; flex-wrap: wrap; }
+    #app .modal, #app [role="dialog"], #app .legado-v4-dialog,
+    #app #uxModalCard, #app #confirmModal > div { width: min(100%, 760px); max-width: calc(100vw - 16px); max-height: calc(100dvh - 16px); overflow: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #app *, #app *::before, #app *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
+</style>
+
+</head>
 
 <body>
 
@@ -9074,7 +9155,6 @@ document.head.appendChild(s);}
 
 
 
-</html>
 
 <!-- ============================================================
      FINAL 24 — APRIMORAMENTO DE PERFIL + TERMOS + MODAL FINANCEIRO
@@ -9176,8 +9256,7 @@ document.head.appendChild(s);}
 
 
 
-<script id="lqe-clean-runtime">(function(){'use strict';const clean=()=>{try{document.querySelectorAll('#mainNav button[data-view="recados"],#recadosBadge').forEach(x=>x.remove());document.querySelectorAll('.quick-action,.final29-flow-actions button').forEach(x=>{if(/recado|conversa/i.test(x.textContent||''))x.remove()});document.querySelectorAll('.btn svg').forEach(x=>{x.style.width='13px';x.style.height='13px'});}catch(e){}};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(clean,100),{once:true});else setTimeout(clean,100);new MutationObserver(clean).observe(document.body,{childList:true,subtree:true});})();</script>
-</body>
+<script id="lqe-clean-runtime">(function(){'use strict';const clean=()=>{try{document.querySelectorAll('#mainNav button[data-view="recados"],#recadosBadge').forEach(x=>x.remove());document.querySelectorAll('.quick-action,.final29-flow-actions button').forEach(x=>{if(/recado|conversa/i.test(x.textContent||''))x.remove()});/* Os tamanhos dos ícones são controlados pelo CSS responsivo de cada botão. */}catch(e){}};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(clean,100),{once:true});else setTimeout(clean,100);new MutationObserver(clean).observe(document.body,{childList:true,subtree:true});})();</script>
 
 
 
@@ -9194,7 +9273,7 @@ document.head.appendChild(s);}
   const uid=()=>W.state?.user?.id||W.state?.session?.user?.id||null;
   const db=()=>W.supabaseClient||null;
   const today=()=>typeof W.todayInputDate==='function'?W.todayInputDate():new Date().toISOString().slice(0,10);
-  const money=v=>{try{return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(v||0)||0)}catch(_){return `R$ ${Number(v||0).toFixed(2).replace('.',',')}}`}};
+  const money=v=>{try{return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(v||0)||0)}catch(_){return `R$ ${Number(v||0).toFixed(2).replace('.',',')}`}};
   const dateBR=v=>{const d=new Date(`${String(v||'').slice(0,10)}T12:00:00`);return Number.isNaN(d.getTime())?'—':d.toLocaleDateString('pt-BR')};
   const dateOnly=v=>String(v||'').slice(0,10);
   const studentName=s=>String(s?.name||s?.full_name||s?.student_name||'Aluno');
@@ -9302,8 +9381,11 @@ document.head.appendChild(s);}
   async function loadFinance43(){
     const c=db(),me=uid();if(!c||!me)throw new Error('Sessão não encontrada.');
     const [a,b]=await Promise.allSettled([c.from('financial_entries').select('*').eq('user_id',me).order('competence_date',{ascending:false}).limit(3000),c.from('payments').select('*').eq('user_id',me).order('payment_date',{ascending:false}).limit(3000)]);
-    const modern=a.status==='fulfilled'&&!a.value.error?(a.value.data||[]):[];const pays=b.status==='fulfilled'&&!b.value.error?(b.value.data||[]):[];
-    if(!modern.length&&!pays.length && a.status==='rejected' && b.status==='rejected')throw new Error('Não foi possível acessar os dados financeiros.');
+    const failedA=a.status!=='fulfilled'||Boolean(a.value?.error);
+    const failedB=b.status!=='fulfilled'||Boolean(b.value?.error);
+    const modern=!failedA?(a.value.data||[]):[];
+    const pays=!failedB?(b.value.data||[]):[];
+    if(failedA&&failedB){const ea=a.status==='fulfilled'?a.value?.error:a.reason;const eb=b.status==='fulfilled'?b.value?.error:b.reason;throw new Error((ea?.message||eb?.message||'Não foi possível acessar os dados financeiros.')+' Verifique as tabelas financial_entries e payments e as permissões RLS do Supabase.');}
     const ids=new Set(modern.map(e=>String(e.legacy_payment_id||'')));
     const legacy=pays.filter(p=>!ids.has(String(p.id))).map(p=>({id:'legacy-'+p.id,legacy:true,kind:'income',amount:Number(p.amount||p.value||0),status:String(p.status||'paid').toLowerCase(),competence_date:dateOnly(p.payment_date||p.date||today()),due_date:dateOnly(p.payment_date||p.date||today()),description:p.description||p.student_name||'Recebimento',student_name:p.student_name||null,payment_method:p.payment_method||p.method||'',source_payment_id:p.id}));
     fin43=modern.map(e=>({...e,kind:e.kind||e.type||'income',competence_date:e.competence_date||e.entry_date||e.payment_date||today()})).concat(legacy);return fin43;
@@ -9830,12 +9912,26 @@ refresh();
  /* A navegação retorna a área de conteúdo ao topo, sem afetar o estado da tela. */
  if(typeof W.navigate==='function'&&!W.navigate.__lqeRepair){
    const original=W.navigate;
-   const wrapped=function(){const result=original.apply(this,arguments);const content=D.querySelector('.content');if(content)content.scrollTo({top:0,behavior:'auto'});const active=D.querySelector('#mainNav button.active');if(active&&active.scrollIntoView){const nav=D.querySelector('.site-nav-wrap');if(nav){const left=active.offsetLeft, right=left+active.offsetWidth;if(left<nav.scrollLeft)nav.scrollTo({left,behavior:'smooth'});else if(right>nav.scrollLeft+nav.clientWidth)nav.scrollTo({left:right-nav.clientWidth,behavior:'smooth'});}}return result};
+   const wrapped=function(viewName){
+     const target=String(viewName||'dashboard')==='recados'?'dashboard':viewName;
+     const args=Array.from(arguments);args[0]=target;
+     const result=original.apply(this,args);
+     const content=D.querySelector('.content');
+     if(content)content.scrollTo({top:0,behavior:'auto'});
+     const active=D.querySelector('#mainNav button.active');
+     const nav=D.querySelector('.site-nav-wrap');
+     if(active&&nav){
+       const left=active.offsetLeft, right=left+active.offsetWidth;
+       if(left<nav.scrollLeft)nav.scrollTo({left,behavior:'auto'});
+       else if(right>nav.scrollLeft+nav.clientWidth)nav.scrollTo({left:right-nav.clientWidth,behavior:'auto'});
+     }
+     return result;
+   };
    wrapped.__lqeRepair=true;W.navigate=wrapped;
  }
  /* Fecha modais apenas quando o clique ocorre no backdrop, não dentro do formulário. */
  D.addEventListener('keydown',function(ev){if(ev.key!=='Escape')return;const open=D.querySelector('.legado-v4-modal:not([hidden]),.saas-modal:not([hidden]),#uxModal[style*="display: flex"],#confirmModal[style*="display: flex"]');if(!open)return;const close=open.querySelector('[data-close],.modal-close,[aria-label="Fechar"]');if(close)close.click();});
 })();
 </script>
-
+</body>
 </html>
