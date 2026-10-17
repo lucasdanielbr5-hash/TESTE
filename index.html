@@ -4430,6 +4430,66 @@ body {
 .admin-activity-copy small{font-size:10px!important}
 @media(max-width:1050px){.activities-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:520px){.activities-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}.activities-grid .activity-card{padding:9px!important;gap:6px!important}.activity-card-image-wrap{height:66px!important;max-height:66px!important}.activity-card-image{max-height:66px!important}.activities-grid .activity-card h3{font-size:13px!important}.activities-grid .activity-card p{font-size:11px!important;-webkit-line-clamp:2}.activity-card-footer a{font-size:10px!important;padding:6px!important;min-height:32px!important}.activity-card-footer>span{font-size:9px!important}}
+
+/* Termos obrigatórios, assinatura eletrônica e monitoramento de presença do Prisma. */
+.workspace.terms-required .sidebar,.workspace.terms-required .sidebar-backdrop,.workspace.terms-required .topbar,.workspace.terms-required .app-footer{display:none!important}
+.workspace.terms-required .main-area{margin-left:0!important;min-height:100vh}
+.workspace.terms-required .page-content{width:100%;max-width:1180px;margin:0 auto;padding:clamp(16px,3vw,36px)}
+.terms-sign-page{display:grid;gap:18px}
+.terms-required-notice{display:flex;align-items:flex-start;gap:13px;padding:17px 19px;border:1px solid #d6e7dd;border-radius:15px;background:#f3faf5;color:#294d3d}
+.terms-required-notice>i{width:25px;height:25px;flex:none;margin-top:2px}
+.terms-required-notice strong{display:block;font-size:14px;margin-bottom:4px}
+.terms-required-notice p{margin:0;color:#60776b;font-size:12px;line-height:1.6}
+.terms-document-panel,.terms-signature-panel{min-width:0;padding:clamp(16px,2vw,25px)}
+.terms-document-panel .panel-header{align-items:flex-start;flex-wrap:wrap}
+.terms-document-frame{display:block;width:100%;height:min(72vh,820px);min-height:460px;border:1px solid var(--line);border-radius:12px;background:#f6f8f7}
+.terms-document-fallback{margin:10px 0 0!important;font-size:11px;color:var(--muted)}
+.terms-document-fallback a{color:var(--green-800);font-weight:700}
+.terms-signature-state{display:flex;align-items:flex-start;gap:12px;margin-bottom:19px}
+.terms-signature-state-icon{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:13px;background:var(--green-50);color:var(--green-800)}
+.terms-signature-state-icon svg{width:21px;height:21px}
+.terms-signature-state h2{margin:4px 0 4px;font-size:19px}
+.terms-signature-state p{margin:0;color:var(--muted);font-size:12px;line-height:1.6}
+.terms-signature-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.65fr);gap:14px;align-items:end}
+.terms-account-note{display:flex;align-items:center;gap:8px;min-width:0;padding:13px;border:1px solid var(--line);border-radius:11px;color:var(--muted);font-size:11px;overflow-wrap:anywhere}
+.terms-account-note svg{width:16px;flex:none;color:var(--green-700)}
+.terms-consent-check{display:flex;align-items:flex-start;gap:11px;margin:18px 0 0;padding:15px;border:1px solid var(--line);border-radius:13px;background:var(--surface-soft);cursor:pointer}
+.terms-consent-check input{width:18px;height:18px;flex:none;margin:1px 0 0;accent-color:var(--green-700)}
+.terms-consent-check span{font-size:12px;line-height:1.75;color:var(--ink-soft)}
+.terms-signature-preview{display:none;gap:5px;margin-top:15px;padding:15px;border:1px dashed var(--line-strong);border-radius:12px;background:#fbfdfb}
+.terms-signature-preview.is-ready{display:grid}
+.terms-signature-preview>span,.terms-signature-preview>small{color:var(--muted);font-size:10px}
+.terms-signature-preview>strong{font-family:"Segoe Script","Bradley Hand","Brush Script MT",cursive;font-size:27px;font-style:italic;color:var(--green-900);font-weight:600;overflow-wrap:anywhere}
+.terms-page-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:20px}
+.terms-signature-legal-note{margin:14px 0 0;font-size:10px;line-height:1.6;color:var(--muted)}
+.terms-signed-record{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+.terms-signed-record>div{min-width:0;display:grid;gap:5px;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--surface-soft)}
+.terms-signed-record small{font-size:10px;color:var(--muted)}.terms-signed-record strong{font-size:12px;overflow-wrap:anywhere}
+.profile-terms-status{display:flex;align-items:flex-start;gap:10px;padding:13px;border-radius:12px;margin-bottom:13px;background:var(--surface-soft);border:1px solid var(--line)}
+.profile-terms-status>i{width:20px;height:20px;flex:none;margin-top:1px;color:var(--green-700)}
+.profile-terms-pending>i{color:#a56b26}
+.profile-terms-status>div{display:grid;gap:4px;min-width:0}.profile-terms-status strong{font-size:12px}.profile-terms-status span{font-size:11px;color:var(--muted);overflow-wrap:anywhere;line-height:1.5}
+.profile-terms-actions{display:grid;gap:10px}.profile-terms-link{display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;font-size:11px}
+.master-presence-widget{position:relative;flex:none}
+.master-presence-toggle{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 10px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--ink-soft);font-size:11px;font-weight:700;white-space:nowrap;box-shadow:var(--shadow-xs)}
+.master-presence-toggle:hover,.master-presence-toggle[aria-expanded=true]{border-color:var(--line-strong);background:var(--green-50)}
+.master-presence-toggle>svg{width:16px;height:16px;color:var(--green-700)}
+.master-presence-toggle>strong{display:grid;place-items:center;min-width:20px;height:20px;border-radius:7px;background:var(--green-100);color:var(--green-900);font-size:10px}
+.master-presence-popover{display:none;position:absolute;right:0;top:calc(100% + 10px);z-index:120;width:min(340px,calc(100vw - 28px));padding:13px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:var(--shadow-lg)}
+.master-presence-popover.is-open{display:block}
+.master-presence-popover>header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 1px 11px;border-bottom:1px solid var(--line)}
+.master-presence-popover>header>div{display:grid;gap:3px;min-width:0}.master-presence-popover>header strong{font-size:13px}.master-presence-popover>header small{font-size:10px;color:var(--muted)}
+.master-presence-refresh{width:30px;height:30px;flex:none}
+.master-presence-list{display:grid;gap:7px;max-height:320px;overflow:auto;padding:10px 0 2px}
+.master-presence-person{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:9px;padding:8px;border:1px solid var(--line);border-radius:11px;background:var(--surface-soft)}
+.master-presence-avatar{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--green-100);color:var(--green-900);font-weight:800;font-size:10px}
+.master-presence-person>div{display:grid;gap:3px;min-width:0}.master-presence-person>div strong{font-size:11px;overflow-wrap:anywhere}.master-presence-person>div small{font-size:9px;color:var(--muted);overflow-wrap:anywhere}
+.master-presence-last-seen{display:flex;align-items:center;gap:5px;white-space:nowrap;font-size:9px;color:var(--muted)}
+.master-presence-last-seen i{display:block;width:7px;height:7px;border-radius:50%;background:#2d9b63;box-shadow:0 0 0 3px rgb(45 155 99 / 12%)}
+.master-presence-message{margin:0;padding:15px 8px;text-align:center;color:var(--muted);font-size:11px;line-height:1.6;overflow-wrap:anywhere}.master-presence-message.master-presence-error{color:#a12d27;text-align:left}
+.master-presence-footnote{margin:9px 0 0;padding-top:9px;border-top:1px solid var(--line);color:var(--muted);font-size:9px;line-height:1.5}
+@media(max-width:760px){.terms-document-frame{min-height:380px;height:63vh}.terms-signature-fields,.terms-signed-record{grid-template-columns:minmax(0,1fr)}.terms-page-actions{align-items:stretch;flex-direction:column-reverse}.terms-page-actions .button{width:100%;justify-content:center}.master-presence-toggle{width:36px;justify-content:center;padding:0}.master-presence-toggle>span{display:none}.master-presence-toggle>strong{position:absolute;right:-5px;top:-5px;min-width:16px;height:16px;border:2px solid var(--surface);border-radius:50%;font-size:8px}.master-presence-popover{right:-48px}}
+
 </style>
 <script>
 (function sanitizeCredentialQuery() {
@@ -4566,7 +4626,7 @@ const SOURCES = {
     "  financialDate: ['competence_date', 'due_date', 'entry_date', 'created_at'],",
     "  profileName: ['full_name', 'name', 'display_name'],",
     "});",
-    ""
+    "",
   ].join("\n"),
   "core/repository.js": [
     "import { TABLES } from '../config.js';",
@@ -4991,7 +5051,7 @@ const SOURCES = {
     "  if (/row-level security|violates row-level security/i.test(`${message} ${details}`)) return 'O Supabase bloqueou a operação pelas políticas de acesso (RLS). Confira as permissões da conta.';",
     "  return [message, details, hint].filter(Boolean).join(' · ') || `Não foi possível acessar os dados de ${key}.`;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "core/store.js": [
     "export const state = {",
@@ -5051,7 +5111,7 @@ const SOURCES = {
     "export function financeEntryById(id) {",
     "  return state.finance.find((entry) => String(entry.id) === String(id)) || null;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "core/supabase.js": [
     "import { createClient } from '@supabase/supabase-js';",
@@ -5075,7 +5135,7 @@ const SOURCES = {
     "    throw new Error('A URL do Supabase deve usar HTTPS.');",
     "  }",
     "}",
-    ""
+    "",
   ].join("\n"),
   "core/ui.js": [
     "import { escapeHTML } from './utils.js';",
@@ -5228,7 +5288,7 @@ const SOURCES = {
     "  if (!rows.length) return empty || emptyState({});",
     "  return `<div class=\"table-scroll\"><table class=\"data-table ${className}\"><thead><tr>${columns.map((column) => `<th scope=\"col\">${escapeHTML(column.label)}</th>`).join('')}</tr></thead><tbody>${rows.map((row) => `<tr>${columns.map((column) => `<td>${column.render ? column.render(row) : escapeHTML(row[column.key] ?? '—')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "core/utils.js": [
     "export const EMPTY = '—';",
@@ -5604,7 +5664,7 @@ const SOURCES = {
     "  const average = scores.length ? scores.reduce((sum, score) => sum + score, 0) / scores.length : null;",
     "  return { count: entries.length, scored: scores.length, average, latest: entries[0] ?? null };",
     "}",
-    ""
+    "",
   ].join("\n"),
   "pages/agenda.js": [
     "import { state } from '../core/store.js';",
@@ -5620,7 +5680,7 @@ const SOURCES = {
     "    <div class=\"agenda-layout\"><section class=\"panel agenda-day-panel\"><header class=\"panel-header\"><div><span class=\"eyebrow\">DIA SELECIONADO</span><h2>${formatDate(date, { weekday: 'long', day: '2-digit', month: 'long' })}</h2><p>Abra um compromisso para consultar os dados ou registrar atendimento.</p></div><span class=\"count-chip\">${selected.length} no dia</span></header>${selected.length ? `<div class=\"agenda-day-list\">${selected.map((item) => `<article class=\"agenda-slot\"><div class=\"agenda-time\"><strong>${appointmentTime(item) || '—'}</strong><span>${Number(item.duration || 50)} min</span></div><div class=\"agenda-slot-content\"><strong>${studentName({ name: item.student_name || state.students.find((student) => String(student.id) === String(item.student_id))?.name || 'Aluno' })}</strong><p>${String(item.type || 'Atendimento').replace(/[&<>\"']/g, '')} ${item.notes ? `· ${String(item.notes).slice(0, 90).replace(/[&<>\"']/g, '')}` : ''}</p><div>${statusBadge(item.status)} ${String(item.status).toLowerCase() !== 'completed' ? `<button class=\"text-button\" data-action=\"start-appointment\" data-id=\"${item.id}\">${String(item.status).toLowerCase() === 'in_progress' ? 'Continuar registro' : 'Iniciar atendimento'} <i data-lucide=\"arrow-up-right\"></i></button>` : `<button class=\"text-button\" data-action=\"open-appointment\" data-id=\"${item.id}\">Ver registro</button>`}</div></div><button class=\"table-action\" data-action=\"edit-appointment\" data-id=\"${item.id}\" aria-label=\"Editar compromisso\"><i data-lucide=\"pencil\"></i></button></article>`).join('')}</div>` : emptyState({ icon: 'calendar-days', title: 'Nenhum compromisso nesta data', message: 'Você pode selecionar outra data ou adicionar um compromisso.' })}</section>",
     "    <section class=\"panel agenda-upcoming-panel\"><header class=\"panel-header\"><div><h2>Próximos compromissos</h2><p>Lista cronológica para consulta rápida.</p></div></header>${upcoming.length ? `<div class=\"compact-list\">${upcoming.map((item) => `<article class=\"compact-list-item\"><span class=\"compact-date\"><strong>${String(appointmentDate(item)).slice(8, 10)}</strong><small>${formatDate(appointmentDate(item), { month: 'short' })}</small></span><div><strong>${studentName({ name: item.student_name || state.students.find((student) => String(student.id) === String(item.student_id))?.name || 'Aluno' })}</strong><small>${formatDateTime(appointmentDate(item), appointmentTime(item))}</small></div><button class=\"table-action\" data-action=\"open-appointment\" data-id=\"${item.id}\" aria-label=\"Abrir compromisso\"><i data-lucide=\"arrow-up-right\"></i></button></article>`).join('')}</div>` : emptyState({ icon: 'calendar-check', title: 'Agenda sem compromissos futuros', message: 'Os próximos horários serão exibidos aqui.' })}</section></div>`;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "pages/bncc.js": [
     "import { escapeHTML } from '../core/utils.js';",
@@ -5773,7 +5833,7 @@ const SOURCES = {
     "    </section>",
     "    <section class=\"bncc-caveat\"><i data-lucide=\"shield-check\"></i><p><strong>Uso responsável:</strong> a BNCC é uma referência curricular nacional, não um instrumento diagnóstico. Registre observações individualizadas, contexto e fontes de evidência no prontuário do aluno.</p></section>`;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "pages/dashboard.js": [
     "import { state } from '../core/store.js';",
@@ -5831,7 +5891,7 @@ const SOURCES = {
     "      <div class=\"dashboard-secondary\">${panel({ title: 'Ações frequentes', subtitle: 'Acesse os registros sem interromper seu fluxo.', icon: 'zap', content: quickLinks() })}${panel({ title: 'Resumo financeiro', subtitle: 'Valores calculados a partir dos lançamentos.', icon: 'wallet', content: `<div class=\"finance-mini-row\"><span>Recebido</span><strong>${formatCurrency(paidIncome)}</strong></div><div class=\"finance-mini-row\"><span>Pendente de recebimento</span><strong>${formatCurrency(openIncome)}</strong></div><div class=\"finance-mini-row\"><span>Despesas registradas</span><strong>${formatCurrency(sumAmounts(state.finance, (entry) => financialKind(entry) === 'expense'))}</strong></div><button class=\"button button-secondary button-wide\" data-navigate=\"finance\">Ver financeiro <i data-lucide=\"arrow-up-right\"></i></button>` })}</div>",
     "    </div>`;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "pages/documents.js": [
     "import { state } from '../core/store.js';",
@@ -5876,7 +5936,7 @@ const SOURCES = {
     "  text = text.replace(/\\{\\{[a-zA-Z0-9_.-]+\\}\\}/g, '________________');",
     "  return text;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "pages/evaluations.js": [
     "import { state } from '../core/store.js';",
@@ -6110,7 +6170,7 @@ const SOURCES = {
     "  const objectRows = Object.entries(data).filter(([, value]) => value !== null && value !== undefined && String(value).trim() !== '');",
     "  return `<div class=\"evaluation-document\"><div class=\"evaluation-document-top\"><span class=\"evaluation-type-mark\"><i data-lucide=\"clipboard-check\"></i></span><div><span class=\"eyebrow\">REGISTRO DE AVALIAÇÃO</span><h3>${String(item.title || item.type || 'Avaliação').replace(/[&<>\"']/g, '')}</h3><p>${String(item.student_name || studentName(student || {})).replace(/[&<>\"']/g, '')} · ${formatDate(item.evaluation_date)}</p></div>${statusBadge(item.status)}</div><div class=\"evaluation-summary-grid\"><div><small>Instrumento / modalidade</small><strong>${String(item.type || 'Não informado').replace(/[&<>\"']/g, '')}</strong></div><div><small>Status</small><strong>${statusLabel(item.status || 'pending')}</strong></div><div><small>Aluno vinculado</small><strong>${String(item.student_name || studentName(student || {})).replace(/[&<>\"']/g, '')}</strong></div></div><section class=\"evaluation-full-section\"><h4>Anamnese psicopedagógica</h4><p class=\"preserve-lines\">${String(data.anamnesis || item.anamnesis || 'Nenhuma anamnese foi registrada.').replace(/[&<>\"']/g, '')}</p></section><section class=\"evaluation-full-section\"><h4>Síntese</h4><p>${String(item.summary || 'Nenhuma síntese foi registrada.').replace(/[&<>\"']/g, '')}</p></section><section class=\"evaluation-full-section\"><h4>Observações e análise</h4><p class=\"preserve-lines\">${String(item.notes || 'Nenhuma observação foi registrada.').replace(/[&<>\"']/g, '')}</p></section>${objectRows.length ? `<section class=\"evaluation-full-section\"><h4>Dados detalhados da aplicação</h4><dl class=\"evaluation-data-list\">${objectRows.map(([key, value]) => `<div><dt>${String(key).replace(/[_-]+/g, ' ').replace(/[&<>\"']/g, '')}</dt><dd>${typeof value === 'object' ? JSON.stringify(value, null, 2).replace(/[&<>\"']/g, '') : String(value).replace(/[&<>\"']/g, '')}</dd></div>`).join('')}</dl></section>` : ''}<section class=\"evaluation-full-section\"><h4>Encaminhamentos e próximos passos</h4><p class=\"preserve-lines\">${String(item.recommendations || data.recommendations || 'Não há encaminhamentos adicionais registrados.').replace(/[&<>\"']/g, '')}</p></section></div>`;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "pages/finance.js": [
     "import { state } from '../core/store.js';",
@@ -6148,7 +6208,7 @@ const SOURCES = {
     "    return `<tr><td><strong>${String(entry.description || entry.student_name || (kind === 'expense' ? 'Despesa' : 'Recebimento')).replace(/[&<>\"']/g, '')}</strong><small class=\"table-secondary\">${String(entry.category || entry.student_name || categoryFromDescription(entry.description) || 'Sem categoria').replace(/[&<>\"']/g, '')}</small></td><td><span class=\"kind-tag kind-${kind}\">${kind === 'expense' ? 'Despesa' : 'Conta / recebimento'}</span></td><td>${formatDate(entry.competence_date || entry.due_date)}${entry.due_date && entry.competence_date ? `<small class=\"table-secondary\">Venc. ${formatDate(entry.due_date)}</small>` : ''}</td><td><strong>${formatCurrency(entry.amount)}</strong></td><td>${statusBadge(due)}${isPaid(entry) && entry.payment_method ? `<small class=\"table-secondary\">${String(entry.payment_method).replace(/[&<>\"']/g, '')}</small>` : ''}</td><td><div class=\"table-actions\">${kind === 'income' && !isPaid(entry) ? `<button class=\"table-action\" data-action=\"mark-finance-paid\" data-id=\"${entry.id}\" aria-label=\"Registrar pagamento\"><i data-lucide=\"check-check\"></i></button>` : ''}<button class=\"table-action\" data-action=\"edit-finance\" data-id=\"${entry.id}\" aria-label=\"Editar lançamento\"><i data-lucide=\"pencil\"></i></button><button class=\"table-action\" data-action=\"delete-finance\" data-id=\"${entry.id}\" aria-label=\"Excluir lançamento\"><i data-lucide=\"trash-2\"></i></button>${kind === 'income' ? `<button class=\"table-action\" data-action=\"receipt-from-finance\" data-id=\"${entry.id}\" aria-label=\"Gerar recibo\"><i data-lucide=\"file-text\"></i></button>` : ''}</div></td></tr>`;",
     "  }).join('')}</tbody></table></div>`;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "pages/interventions.js": [
     "import { state } from '../core/store.js';",
@@ -6203,24 +6263,30 @@ const SOURCES = {
     "export function interventionList(entries, query = '') {",
     "  return linkedList(entries, query);",
     "}",
-    ""
+    "",
   ].join("\n"),
   "pages/profile.js": [
     "import { state } from '../core/store.js';",
-    "import { initials, profileName } from '../core/utils.js';",
+    "import { initials, profileName, escapeHTML } from '../core/utils.js';",
     "import { pageHeader, panel } from '../core/ui.js';",
     "",
     "export function renderProfile() {",
     "  const profile = state.profile || {};",
     "  const user = state.user || {};",
+    "  const termsVersion = '2026-10-17-v1';",
+    "  const termsUrl = 'https://www.image2url.com/r2/default/documents/1792263251755-22ed2136-b577-45c3-b335-c56baf8cc934.pdf';",
+    "  const termsMetadata = user.user_metadata?.prisma_terms_acceptance || {};",
+    "  const termsProfileAccepted = profile.terms_version === termsVersion && profile.terms_accepted_at && profile.terms_accepted_name;",
+    "  const termsAcceptance = termsProfileAccepted ? { accepted_name: profile.terms_accepted_name, accepted_at: profile.terms_accepted_at, terms_version: profile.terms_version, document_url: termsUrl } : (termsMetadata.terms_version === termsVersion && termsMetadata.accepted_at ? termsMetadata : null);",
+    "  const termsDate = termsAcceptance?.accepted_at ? new Date(termsAcceptance.accepted_at).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : '';",
     "  const name = profileName(profile, user);",
     "  const photo = profile.photo_url || profile.avatar_url || profile.image_url || '';",
     "  return `${pageHeader({ title: 'Perfil do professor', description: 'Mantenha seus dados profissionais, identificação visual e informações para os documentos atualizados.', action: '<button class=\"button button-primary\" data-action=\"save-profile\" form=\"profile-form\"><i data-lucide=\"save\"></i>Salvar alterações</button>' })}",
     "    <div class=\"profile-page-grid\"><section class=\"panel profile-main-panel\"><div class=\"profile-identity\"><div class=\"profile-photo-wrap\">${photo ? `<img class=\"profile-photo\" src=\"${String(photo).replace(/[\"<>]/g, '')}\" alt=\"Foto de ${name.replace(/[&<>\"']/g, '')}\">` : `<span class=\"profile-photo profile-photo-placeholder\">${initials(name)}</span>`}<label class=\"photo-upload-button\"><i data-lucide=\"camera\"></i><span>Alterar foto</span><input type=\"file\" id=\"profile-photo-file\" accept=\"image/*\" hidden></label></div><div><span class=\"eyebrow\">IDENTIDADE PROFISSIONAL</span><h2>${name.replace(/[&<>\"']/g, '')}</h2><p>${String(profile.professional_title || profile.qualification || 'Professor(a) / Psicopedagogo(a)').replace(/[&<>\"']/g, '')}</p><span class=\"profile-email\"><i data-lucide=\"mail\"></i>${String(user.email || profile.email || '').replace(/[&<>\"']/g, '')}</span></div></div>",
     "      <form id=\"profile-form\"><input type=\"hidden\" name=\"photo_url\" value=\"${String(photo).replace(/[&<>\"']/g, '')}\"><div class=\"form-section-heading\"><h3>Dados de identificação</h3><p>As informações abaixo podem ser utilizadas nos documentos gerados.</p></div><div class=\"form-grid\"><label class=\"field\"><span>Nome completo</span><input name=\"full_name\" value=\"${String(profile.full_name || profile.name || user.user_metadata?.full_name || '').replace(/[&<>\"']/g, '')}\" required></label><label class=\"field\"><span>Nome profissional / título</span><input name=\"professional_title\" value=\"${String(profile.professional_title || profile.qualification || '').replace(/[&<>\"']/g, '')}\" placeholder=\"Ex.: Psicopedagoga\"></label><label class=\"field\"><span>Registro profissional</span><input name=\"registration_number\" value=\"${String(profile.registration_number || profile.crp || profile.registration || '').replace(/[&<>\"']/g, '')}\" placeholder=\"Quando aplicável\"></label><label class=\"field\"><span>Telefone profissional</span><input name=\"phone\" value=\"${String(profile.phone || '').replace(/[&<>\"']/g, '')}\" placeholder=\"(00) 00000-0000\"></label><label class=\"field field-full\"><span>Endereço profissional</span><input name=\"professional_address\" value=\"${String(profile.professional_address || profile.address || '').replace(/[&<>\"']/g, '')}\" placeholder=\"Endereço que pode aparecer nos documentos\"></label><label class=\"field\"><span>Cidade</span><input name=\"city\" value=\"${String(profile.city || '').replace(/[&<>\"']/g, '')}\" placeholder=\"Cidade\"></label><label class=\"field\"><span>Estado</span><input name=\"state\" value=\"${String(profile.state || '').replace(/[&<>\"']/g, '')}\" placeholder=\"UF\"></label><label class=\"field field-full\"><span>Apresentação profissional</span><textarea name=\"bio\" rows=\"4\" placeholder=\"Descreva brevemente sua atuação profissional.\">${String(profile.bio || profile.description || '').replace(/[&<>\"']/g, '')}</textarea></label></div></form>",
-    "    </section><aside class=\"profile-side-column\">${panel({ title: 'Conta e acesso', subtitle: 'Informações da sessão autenticada.', icon: 'shield-check', content: `<div class=\"profile-account-row\"><span>E-mail da conta</span><strong>${String(user.email || '—').replace(/[&<>\"']/g, '')}</strong></div><div class=\"profile-account-row\"><span>Identificador da conta</span><code>${String(user.id || '—').replace(/[&<>\"']/g, '')}</code></div><div class=\"profile-account-note\"><i data-lucide=\"info\"></i><span>O acesso e o plano da plataforma são administrados pelo responsável pela plataforma. Esta tela contém seus dados profissionais.</span></div><button class=\"button button-secondary button-wide\" data-action=\"change-password\"><i data-lucide=\"key-round\"></i>Redefinir senha por e-mail</button>` })}${panel({ title: 'Resumo do espaço', subtitle: 'Registros associados à sua conta.', icon: 'chart-no-axes-combined', content: `<div class=\"profile-summary-list\"><div><span>Alunos</span><strong>${state.students.length}</strong></div><div><span>Atendimentos</span><strong>${state.appointments.length}</strong></div><div><span>Avaliações</span><strong>${state.evaluations.length}</strong></div><div><span>Lançamentos financeiros</span><strong>${state.finance.length}</strong></div></div>` })}</aside></div>`;",
+    "    </section><aside class=\"profile-side-column\">${panel({ title: 'Conta e acesso', subtitle: 'Informações da sessão autenticada.', icon: 'shield-check', content: `<div class=\"profile-account-row\"><span>E-mail da conta</span><strong>${String(user.email || '—').replace(/[&<>\"']/g, '')}</strong></div><div class=\"profile-account-row\"><span>Identificador da conta</span><code>${String(user.id || '—').replace(/[&<>\"']/g, '')}</code></div><div class=\"profile-account-note\"><i data-lucide=\"info\"></i><span>O acesso e o plano da plataforma são administrados pelo responsável pela plataforma. Esta tela contém seus dados profissionais.</span></div><button class=\"button button-secondary button-wide\" data-action=\"change-password\"><i data-lucide=\"key-round\"></i>Redefinir senha por e-mail</button>` })}${panel({ title: 'Resumo do espaço', subtitle: 'Registros associados à sua conta.', icon: 'chart-no-axes-combined', content: `<div class=\"profile-summary-list\"><div><span>Alunos</span><strong>${state.students.length}</strong></div><div><span>Atendimentos</span><strong>${state.appointments.length}</strong></div><div><span>Avaliações</span><strong>${state.evaluations.length}</strong></div><div><span>Lançamentos financeiros</span><strong>${state.finance.length}</strong></div></div>` })}${panel({ title: 'Termos e Condições de Uso', subtitle: 'Assinatura eletrônica vinculada ao seu perfil para consulta posterior.', icon: 'file-signature', content: termsAcceptance ? `<div class=\"profile-terms-status profile-terms-accepted\"><i data-lucide=\"shield-check\"></i><div><strong>Assinatura registrada</strong><span>Nome digitado: ${escapeHTML(termsAcceptance.accepted_name || name)}</span><span>Data e hora: ${escapeHTML(termsDate)}</span><span>Versão: ${escapeHTML(termsAcceptance.terms_version || termsVersion)}</span></div></div><div class=\"profile-terms-actions\"><button type=\"button\" class=\"button button-primary button-wide\" data-navigate=\"terms\"><i data-lucide=\"file-text\"></i>Consultar termos e assinatura</button><a class=\"text-button profile-terms-link\" href=\"${termsUrl}\" target=\"_blank\" rel=\"noopener noreferrer\">Abrir PDF original <i data-lucide=\"external-link\"></i></a></div>` : `<div class=\"profile-terms-status profile-terms-pending\"><i data-lucide=\"alert-circle\"></i><div><strong>Assinatura pendente</strong><span>Leia e assine a versão atual antes de continuar.</span></div></div><button type=\"button\" class=\"button button-primary button-wide\" data-navigate=\"terms\">Ler e assinar</button>` })}</aside></div>`;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "pages/students.js": [
     "import { state } from '../core/store.js';",
@@ -6274,7 +6340,7 @@ const SOURCES = {
     "    <section><header><h4>Histórico de atendimento</h4><button class=\"text-button\" data-action=\"new-record\" data-student-id=\"${student.id}\">Novo registro</button></header>${relatedRecords.length ? `<div class=\"detail-record-list\">${relatedRecords.map((record) => `<article class=\"detail-record\"><span class=\"record-mark\"><i data-lucide=\"notebook-pen\"></i></span><div><strong>${String(record.title || record.record_type || record.type || 'Registro de atendimento').replace(/[&<>\"']/g, '')}</strong><small>${formatDate(record.record_date || record.created_at || record.date)}</small><p class=\"preserve-lines\">${normalizeLineBreaks(String(record.content || record.notes || record.description || 'Sem descrição.')).replace(/[&<>\"']/g, '')}</p></div><button class=\"table-action\" data-action=\"view-record\" data-id=\"${record.id}\" aria-label=\"Visualizar histórico de atendimento completo\" title=\"Visualizar registro completo\"><i data-lucide=\"eye\"></i></button></article>`).join('')}</div>` : '<p class=\"empty-inline\">O histórico de atendimento ficará disponível aqui.</p>'}</section>",
     "    <section><header><h4>Encontros com a família</h4><button class=\"text-button\" data-action=\"new-family-meeting\" data-student-id=\"${student.id}\"><i data-lucide=\"users-round\"></i>Registrar encontro</button></header>${familyMeetings.length ? `<div class=\"detail-record-list\">${familyMeetings.map((record) => { const content = normalizeLineBreaks(String(record.content || '')); const title = record.title || content.split(/\\r?\\n/).find((line) => /^Título:/i.test(line))?.replace(/^Título:\\s*/i, '').trim() || 'Encontro com a família'; const meetingDate = content.split(/\\r?\\n/).find((line) => /^Data do encontro:/i.test(line))?.replace(/^Data do encontro:\\s*/i, '').trim() || record.record_date || record.created_at || record.date; return `<article class=\"detail-record\"><span class=\"record-mark\"><i data-lucide=\"users-round\"></i></span><div><strong>${String(title).replace(/[&<>\"']/g, '')}</strong><small>${formatDate(meetingDate)}</small><p class=\"preserve-lines\">${String(content).replace(/[&<>\"']/g, '')}</p></div><button class=\"table-action\" data-action=\"view-record\" data-id=\"${record.id}\" aria-label=\"Ver encontro completo\"><i data-lucide=\"eye\"></i></button><button class=\"table-action\" data-action=\"edit-record\" data-type=\"family_meeting\" data-id=\"${record.id}\" aria-label=\"Editar encontro\"><i data-lucide=\"pencil\"></i></button><button class=\"table-action danger-action\" data-action=\"delete-record\" data-id=\"${record.id}\" aria-label=\"Excluir encontro\"><i data-lucide=\"trash-2\"></i></button></article>`; }).join('')}</div>` : '<p class=\"empty-inline\">Registre aqui pautas, relatos e combinados dos encontros com responsáveis e familiares. Cada encontro ficará vinculado a este prontuário.</p>'}</section></div>`;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "pages/waitlist.js": [
     "import { state } from '../core/store.js';",
@@ -6288,7 +6354,7 @@ const SOURCES = {
     "    <div class=\"waitlist-intro\"><span class=\"waitlist-intro-icon\"><i data-lucide=\"list-ordered\"></i></span><div><strong>Uma fila clara para decisões mais simples</strong><p>Use os dados de contato e a data de entrada para acompanhar a procura sem perder o histórico de cada família.</p></div><span class=\"count-chip\">${state.waitlist.length} cadastro(s)</span></div>",
     "    <section class=\"panel\"><div class=\"list-toolbar\"><div class=\"search-control\"><i data-lucide=\"search\"></i><input id=\"waitlist-search\" type=\"search\" placeholder=\"Buscar interessado, responsável ou contato\" value=\"${query.replace(/[&<>\"']/g, '')}\"></div><button class=\"button button-secondary\" data-action=\"export-waitlist\"><i data-lucide=\"download\"></i>Exportar CSV</button></div>${rows.length ? `<div class=\"table-scroll\"><table class=\"data-table\"><thead><tr><th>Interessado</th><th>Responsável / contato</th><th>Motivo / demanda</th><th>Entrada</th><th>Prioridade</th><th>Situação</th><th class=\"align-right\">Ações</th></tr></thead><tbody>${rows.map((item) => `<tr><td><strong>${String(item.name || item.student_name || 'Sem nome').replace(/[&<>\"']/g, '')}</strong><small class=\"table-secondary\">${String(item.school || item.grade || '').replace(/[&<>\"']/g, '')}</small></td><td>${String(item.guardian_name || item.responsible_name || '—').replace(/[&<>\"']/g, '')}<small class=\"table-secondary\">${String(item.phone || item.guardian_phone || item.responsible_phone || item.contact_phone || item.whatsapp || item.mobile || item.telefone || item.email || 'Contato não informado').replace(/[&<>\"']/g, '')}</small></td><td>${String(item.reason || item.notes || item.main_complaint || 'Não informado').replace(/[&<>\"']/g, '')}</td><td>${formatDate(item.created_at || item.entry_date)}</td><td>${item.priority === undefined || item.priority === null || item.priority === '' ? 'Não definida' : String(item.priority).replace(/[&<>\"']/g, '')}</td><td>${statusBadge(item.status || 'waiting')}</td><td><div class=\"table-actions\"><button class=\"table-action\" data-action=\"whatsapp-waitlist\" data-id=\"${item.id}\" aria-label=\"Avisar pelo WhatsApp que há uma vaga disponível\" title=\"Avisar sobre vaga disponível pelo WhatsApp\"><i data-lucide=\"message-circle\"></i></button><button class=\"table-action\" data-action=\"edit-waitlist\" data-id=\"${item.id}\" aria-label=\"Editar interessado\"><i data-lucide=\"pencil\"></i></button><button class=\"table-action\" data-action=\"convert-waitlist\" data-id=\"${item.id}\" aria-label=\"Cadastrar como aluno\"><i data-lucide=\"user-round-plus\"></i></button><button class=\"table-action\" data-action=\"delete-waitlist\" data-id=\"${item.id}\" aria-label=\"Excluir interessado\"><i data-lucide=\"trash-2\"></i></button></div></td></tr>`).join('')}</tbody></table></div>` : emptyState({ icon: 'list-ordered', title: 'Fila de espera vazia', message: 'Adicione um interessado para acompanhar a demanda e a próxima ação.' })}</section>`;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "pages/recommended.js": [
     "const RECOMMENDED_PLATFORMS = Object.freeze({",
@@ -6372,7 +6438,7 @@ const SOURCES = {
     "    </article>`).join('');",
     "  return `<section class=\"recommended-intro\"><span class=\"eyebrow\">FERRAMENTAS PARA O DIA A DIA</span><h2>Recomendados</h2><p>Uma seleção de serviços externos para organizar pagamentos, criar materiais e encontrar recursos de aprendizagem. Revise planos, licenças, privacidade e adequação pedagógica nos sites oficiais.</p></section><div class=\"recommended-grid\">${cards}</div>`;",
     "}",
-    ""
+    "",
   ].join("\n"),
   "main.js": [
     "",
@@ -6398,7 +6464,7 @@ const SOURCES = {
     "const PAGE_TITLES = {",
     "  dashboard: 'Visão clínica', students: 'Alunos e prontuários', agenda: 'Agenda e atendimentos',",
     "  evaluations: 'Avaliações', interventions: 'Intervenções e planejamento', bncc: 'BNCC e currículo', recommended: 'Recomendados', muralia: 'Muralia', activities: 'Atividades',",
-    "  finance: 'Financeiro', waitlist: 'Fila de espera', documents: 'Modelos e documentos', profile: 'Perfil do professor', admin: 'Administração da plataforma',",
+    "  finance: 'Financeiro', waitlist: 'Fila de espera', documents: 'Modelos e documentos', profile: 'Perfil do professor', admin: 'Administração da plataforma', terms: 'Termos e Condições de Uso',",
     "};",
     "",
     "const PAGE_RENDERERS = {",
@@ -6416,6 +6482,7 @@ const SOURCES = {
     "  documents: renderDocuments,",
     "  profile: renderProfile,",
     "  admin: renderMasterAdminPage,",
+    "  terms: renderTermsPage,",
     "};",
     "",
     "const ROOT = $('#app-root');",
@@ -6423,6 +6490,15 @@ const SOURCES = {
     "let activeStudentDetailId = null;",
     "let masterTeachersCache = [];",
     "const MASTER_ACCOUNT_EMAIL = 'contato@legadoqueensina.com.br';",
+    "const TERMS_VERSION = '2026-10-17-v1';",
+    "const TERMS_DOCUMENT_URL = 'https://www.image2url.com/r2/default/documents/1792263251755-22ed2136-b577-45c3-b335-c56baf8cc934.pdf';",
+    "const PRESENCE_INTERVAL_MS = 60000;",
+    "const PRESENCE_ONLINE_WINDOW_MS = 125000;",
+    "let presenceHeartbeatTimer = null;",
+    "let masterPresenceTimer = null;",
+    "let presenceMonitorKey = '';",
+    "let presenceColumnWarningShown = false;",
+    "let masterPresenceRefreshBusy = false;",
     "",
     "function isMasterAccount() {",
     "  const email = String(state.user?.email || '').trim().toLowerCase();",
@@ -6438,6 +6514,284 @@ const SOURCES = {
     "  if (Number.isFinite(expiry) && expiry < Date.now()) return `O prazo de acesso terminou em ${formatDate(state.profile.access_expires_at)}. Entre em contato com a administração para regularizar seu plano.`;",
     "  return '';",
     "}",
+    "",
+    "function getCurrentTermsAcceptance() {",
+    "  const profile = state.profile || {};",
+    "  const metadata = state.user?.user_metadata?.prisma_terms_acceptance || {};",
+    "  const profileRecord = profile.terms_version === TERMS_VERSION && profile.terms_accepted_at && profile.terms_accepted_name",
+    "    ? { terms_version: profile.terms_version, accepted_at: profile.terms_accepted_at, accepted_name: profile.terms_accepted_name, document_url: TERMS_DOCUMENT_URL }",
+    "    : null;",
+    "  const metadataRecord = metadata.terms_version === TERMS_VERSION && metadata.accepted_at && metadata.accepted_name ? metadata : null;",
+    "  return profileRecord || metadataRecord || null;",
+    "}",
+    "",
+    "function termsAcceptanceRequired() {",
+    "  return Boolean(state.user && !isMasterAccount() && !getCurrentTermsAcceptance());",
+    "}",
+    "",
+    "function renderTermsPage() {",
+    "  const acceptance = getCurrentTermsAcceptance();",
+    "  const name = profileName(state.profile, state.user);",
+    "  const safeName = escapeHTML(name);",
+    "  const signedAt = acceptance?.accepted_at ? new Date(acceptance.accepted_at).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : '';",
+    "  const documentFrame = `<section class=\"panel terms-document-panel\"><header class=\"panel-header\"><div><span class=\"eyebrow\">DOCUMENTO OFICIAL</span><h2>Leia os termos na íntegra</h2><p>O documento abaixo é a versão que ficará vinculada ao seu aceite.</p></div><a class=\"button button-secondary button-small\" href=\"${TERMS_DOCUMENT_URL}\" target=\"_blank\" rel=\"noopener noreferrer\"><i data-lucide=\"external-link\"></i>Abrir PDF</a></header><iframe class=\"terms-document-frame\" title=\"Termos e Condições de Uso do Sistema\" src=\"${TERMS_DOCUMENT_URL}#view=FitH&toolbar=0&navpanes=0\"></iframe><p class=\"terms-document-fallback\">Se o PDF não aparecer no visualizador, <a href=\"${TERMS_DOCUMENT_URL}\" target=\"_blank\" rel=\"noopener noreferrer\">abra os Termos e Condições em outra aba</a>.</p></section>`;",
+    "  if (isMasterAccount() && !acceptance) {",
+    "    return `${pageHeader({ title: 'Termos e Condições de Uso', description: 'Documento de referência da plataforma.' })}<div class=\"terms-sign-page\">${documentFrame}<section class=\"panel terms-signature-panel\"><div class=\"terms-signature-state\"><span class=\"terms-signature-state-icon\"><i data-lucide=\"shield-check\"></i></span><div><span class=\"eyebrow\">CONTA MASTER</span><h2>Consulta do documento</h2><p>A assinatura obrigatória por este fluxo é aplicada às contas de professores. Você pode consultar o PDF acima sem registrar um aceite de professor.</p></div></div></section></div>`;",
+    "  }",
+    "  if (acceptance) {",
+    "    return `${pageHeader({ title: 'Termos e Condições de Uso', description: 'Consulte o documento e o registro eletrônico de aceite vinculado ao seu perfil.' })}<div class=\"terms-sign-page\">${documentFrame}<section class=\"panel terms-signature-panel\"><div class=\"terms-signature-state\"><span class=\"terms-signature-state-icon\"><i data-lucide=\"shield-check\"></i></span><div><span class=\"eyebrow\">ACEITE ELETRÔNICO REGISTRADO</span><h2>Termos assinados</h2><p>O registro abaixo está disponível para consulta no Perfil do professor.</p></div></div><div class=\"terms-signed-record\"><div><small>Nome digitado como assinatura</small><strong>${escapeHTML(acceptance.accepted_name || name)}</strong></div><div><small>Data e hora registradas</small><strong>${escapeHTML(signedAt || '—')}</strong></div><div><small>Versão do documento</small><strong>${escapeHTML(acceptance.terms_version || TERMS_VERSION)}</strong></div></div><div class=\"terms-page-actions\"><button type=\"button\" class=\"button button-primary\" data-navigate=\"profile\"><i data-lucide=\"user-round-cog\"></i>Voltar ao perfil</button><button type=\"button\" class=\"button button-secondary\" data-navigate=\"dashboard\">Ir para o sistema</button></div></section></div>`;",
+    "  }",
+    "  return `${pageHeader({ title: 'Termos e Condições de Uso', description: 'A leitura e a assinatura eletrônica são necessárias antes de usar as demais áreas do Prisma.' })}<div class=\"terms-sign-page\"><div class=\"terms-required-notice\"><i data-lucide=\"file-signature\"></i><div><strong>Primeiro acesso: leitura e assinatura obrigatórias</strong><p>Leia o documento completo. Depois, digite seu nome completo e confirme que leu e aceita os termos. O registro ficará no seu perfil para consulta.</p></div></div>${documentFrame}<section class=\"panel terms-signature-panel\"><div class=\"terms-signature-state\"><span class=\"terms-signature-state-icon\"><i data-lucide=\"pen-line\"></i></span><div><span class=\"eyebrow\">ASSINATURA ELETRÔNICA</span><h2>Registrar aceite</h2><p>A assinatura é o nome que você digitar abaixo, associado à sua conta, à versão do documento e à data/hora do aceite.</p></div></div><form id=\"terms-signature-form\"><div class=\"terms-signature-fields\"><label class=\"field\"><span>Nome completo para assinatura *</span><input id=\"terms-signature-name\" name=\"signature_name\" type=\"text\" maxlength=\"180\" minlength=\"3\" autocomplete=\"name\" required placeholder=\"Digite seu nome completo\"></label><div class=\"terms-account-note\"><i data-lucide=\"user-round-check\"></i><span>Conta: ${escapeHTML(state.user?.email || 'Usuário autenticado')}</span></div></div><label class=\"terms-consent-check\"><input id=\"terms-read-confirmation\" type=\"checkbox\" required><span>Declaro que li integralmente, compreendi e aceito os Termos e Condições de Uso apresentados neste documento, inclusive as regras de uso, privacidade, responsabilidades, planos e encerramento.</span></label><div class=\"terms-signature-preview\" id=\"terms-signature-preview\"><span>Prévia da assinatura</span><strong id=\"terms-signature-preview-name\">—</strong><small>Assinatura por digitação do nome · ${TERMS_VERSION}</small></div><div class=\"terms-page-actions\"><button type=\"button\" class=\"button button-secondary\" data-action=\"blocked-logout\"><i data-lucide=\"log-out\"></i>Sair da plataforma</button><button type=\"button\" id=\"terms-signature-submit\" class=\"button button-primary\" data-action=\"accept-terms\" disabled><i data-lucide=\"file-check-2\"></i>Ler e assinar os termos</button></div></form><p class=\"terms-signature-legal-note\">O sistema registra o nome digitado, a conta autenticada, a versão do documento e a data/hora do aceite. Isso representa uma assinatura eletrônica por digitação, não uma assinatura digital baseada em certificado ICP-Brasil.</p></section></div>`;",
+    "}",
+    "",
+    "function bindTermsPageInputs() {",
+    "  const form = $('#terms-signature-form');",
+    "  if (!form || form.dataset.bound === '1') return;",
+    "  form.dataset.bound = '1';",
+    "  const nameField = $('#terms-signature-name', form);",
+    "  const consent = $('#terms-read-confirmation', form);",
+    "  const button = $('#terms-signature-submit', form);",
+    "  const preview = $('#terms-signature-preview', form);",
+    "  const previewName = $('#terms-signature-preview-name', form);",
+    "  const update = () => {",
+    "    const name = String(nameField?.value || '').trim();",
+    "    if (previewName) previewName.textContent = name || '—';",
+    "    if (preview) preview.classList.toggle('is-ready', Boolean(name));",
+    "    if (button) button.disabled = !(name.length >= 3 && consent?.checked);",
+    "  };",
+    "  nameField?.addEventListener('input', update);",
+    "  consent?.addEventListener('change', update);",
+    "  update();",
+    "}",
+    "",
+    "async function acceptCurrentTerms() {",
+    "  if (!state.user?.id || isMasterAccount()) return;",
+    "  const form = $('#terms-signature-form');",
+    "  const nameField = $('#terms-signature-name', form);",
+    "  const consent = $('#terms-read-confirmation', form);",
+    "  const button = $('#terms-signature-submit', form);",
+    "  if (!form || !form.reportValidity()) return;",
+    "  const acceptedName = String(nameField?.value || '').trim().replace(/\\s+/g, ' ');",
+    "  if (acceptedName.length < 3 || !consent?.checked) return toast('Confirme a leitura e informe o nome completo', 'warning');",
+    "  const userId = String(state.user.id);",
+    "  const acceptedAt = new Date().toISOString();",
+    "  const record = {",
+    "    user_id: userId,",
+    "    email: String(state.user.email || ''),",
+    "    accepted_name: acceptedName,",
+    "    accepted_at: acceptedAt,",
+    "    terms_version: TERMS_VERSION,",
+    "    document_url: TERMS_DOCUMENT_URL,",
+    "    acceptance_method: 'typed-name',",
+    "  };",
+    "  setButtonBusy(button, true, 'Registrando assinatura…');",
+    "  let profileSaved = false;",
+    "  let metadataSaved = false;",
+    "  let profileResultData = null;",
+    "  try {",
+    "    const profileResult = await supabase.from('profiles').update({ terms_accepted_at: acceptedAt, terms_accepted_name: acceptedName, terms_version: TERMS_VERSION }).eq('id', userId).select('*').maybeSingle();",
+    "    if (profileResult.error) {",
+    "      console.warn('[Prisma termos] O registro direto em profiles falhou; será tentado o armazenamento compatível na conta autenticada:', profileResult.error.message);",
+    "    } else if (profileResult.data) {",
+    "      profileSaved = true;",
+    "      profileResultData = profileResult.data;",
+    "    }",
+    "",
+    "    const authResult = await supabase.auth.getUser();",
+    "    if (authResult.error || !authResult.data?.user || String(authResult.data.user.id) !== userId) throw authResult.error || new Error('A sessão autenticada não corresponde ao professor que está assinando.');",
+    "    const authUser = authResult.data.user;",
+    "    const updatedAuth = await supabase.auth.updateUser({ data: { ...(authUser.user_metadata || {}), prisma_terms_acceptance: record } });",
+    "    if (!updatedAuth.error && updatedAuth.data?.user) {",
+    "      state.user = updatedAuth.data.user;",
+    "      metadataSaved = true;",
+    "    } else if (updatedAuth.error) {",
+    "      console.warn('[Prisma termos] Não foi possível gravar o registro em user_metadata:', updatedAuth.error.message);",
+    "    }",
+    "",
+    "    if (!profileSaved && !metadataSaved) throw new Error('O Supabase não confirmou a gravação do aceite. Confira as permissões de atualização de profiles e de user_metadata.');",
+    "",
+    "    // Mantém também um histórico de auditoria separado, caso a tabela esteja disponível e autorizada.",
+    "    try {",
+    "      const audit = await supabase.from('terms_acceptances').insert({ user_id: userId, terms_version: TERMS_VERSION, accepted_name: acceptedName, accepted_at: acceptedAt });",
+    "      if (audit.error) console.warn('[Prisma termos] O aceite foi salvo, mas o histórico separado não pôde ser gravado:', audit.error.message);",
+    "    } catch (auditError) {",
+    "      console.warn('[Prisma termos] Histórico separado indisponível:', auditError?.message || auditError);",
+    "    }",
+    "",
+    "    state.profile = { ...(state.profile || {}), ...(profileResultData || {}), terms_accepted_at: acceptedAt, terms_accepted_name: acceptedName, terms_version: TERMS_VERSION };",
+    "    if (state.user && !state.user.user_metadata?.prisma_terms_acceptance) {",
+    "      state.user = { ...state.user, user_metadata: { ...(state.user.user_metadata || {}), prisma_terms_acceptance: record } };",
+    "    }",
+    "    state.page = 'dashboard';",
+    "    activeStudentDetailId = null;",
+    "    history.replaceState({ page: 'dashboard' }, '', '#dashboard');",
+    "    toast('Termos aceitos e assinatura registrada', 'success', 'O registro ficará disponível na página Perfil do professor.');",
+    "    updatePersonIdentity();",
+    "    configurePresenceMonitoring();",
+    "    renderPage();",
+    "  } catch (error) {",
+    "    console.error('[Prisma termos] Falha ao registrar aceite:', error);",
+    "    toast('Não foi possível registrar a assinatura', 'error', error?.message || 'Confira a conexão e as permissões do Supabase.');",
+    "    setButtonBusy(button, false);",
+    "  }",
+    "}",
+    "",
+    "function closeMasterPresencePopover() {",
+    "  const popover = $('#master-presence-popover');",
+    "  const toggle = $('#master-presence-toggle');",
+    "  popover?.classList.remove('is-open');",
+    "  toggle?.setAttribute('aria-expanded', 'false');",
+    "}",
+    "",
+    "function ensureMasterPresenceWidget() {",
+    "  if (!isMasterAccount()) {",
+    "    $('#master-presence-widget')?.remove();",
+    "    return null;",
+    "  }",
+    "  const actions = $('.topbar-actions');",
+    "  if (!actions) return null;",
+    "  let wrap = $('#master-presence-widget');",
+    "  if (!wrap) {",
+    "    wrap = document.createElement('div');",
+    "    wrap.id = 'master-presence-widget';",
+    "    wrap.className = 'master-presence-widget';",
+    "    wrap.innerHTML = `<button type=\"button\" id=\"master-presence-toggle\" class=\"master-presence-toggle\" aria-expanded=\"false\" aria-controls=\"master-presence-popover\" title=\"Professores logados\"><i data-lucide=\"users-round\"></i><span>Professores</span><strong id=\"master-presence-count\">—</strong></button><div id=\"master-presence-popover\" class=\"master-presence-popover\" role=\"dialog\" aria-label=\"Professores logados\"><header><div><strong>Professores logados</strong><small id=\"master-presence-updated\">Consultando presença…</small></div><button type=\"button\" class=\"icon-button master-presence-refresh\" data-action=\"presence-refresh\" aria-label=\"Atualizar presença\" title=\"Atualizar\"><i data-lucide=\"refresh-cw\"></i></button></header><div id=\"master-presence-list\" class=\"master-presence-list\"><p class=\"master-presence-message\">Carregando presenças…</p></div><p class=\"master-presence-footnote\">Atualização automática a cada minuto. Considera atividade recente na plataforma.</p></div>`;",
+    "    const dateNode = $('#topbar-date', actions);",
+    "    actions.insertBefore(wrap, dateNode || actions.firstChild);",
+    "    $('#master-presence-toggle', wrap)?.addEventListener('click', () => {",
+    "      const popover = $('#master-presence-popover', wrap);",
+    "      const open = !popover?.classList.contains('is-open');",
+    "      popover?.classList.toggle('is-open', open);",
+    "      $('#master-presence-toggle', wrap)?.setAttribute('aria-expanded', String(open));",
+    "      if (open) void refreshMasterPresence();",
+    "    });",
+    "    if (!document.documentElement.dataset.masterPresenceOutsideBound) {",
+    "      document.documentElement.dataset.masterPresenceOutsideBound = '1';",
+    "      document.addEventListener('click', (event) => {",
+    "        const widget = $('#master-presence-widget');",
+    "        if (widget && !widget.contains(event.target)) closeMasterPresencePopover();",
+    "      }, { passive: true });",
+    "    }",
+    "    renderIcons(wrap);",
+    "  }",
+    "  return wrap;",
+    "}",
+    "",
+    "function presenceAge(value) {",
+    "  const ms = new Date(value).getTime();",
+    "  if (!Number.isFinite(ms)) return 'horário indisponível';",
+    "  const seconds = Math.max(0, Math.floor((Date.now() - ms) / 1000));",
+    "  if (seconds < 20) return 'agora';",
+    "  if (seconds < 60) return `há ${seconds}s`;",
+    "  return `há ${Math.floor(seconds / 60)} min`;",
+    "}",
+    "",
+    "function renderMasterPresence(users) {",
+    "  const wrap = ensureMasterPresenceWidget();",
+    "  if (!wrap) return;",
+    "  const candidates = (Array.isArray(users) ? users : []).filter((user) => !user.is_master && !['master', 'admin'].includes(String(user.role || '').toLowerCase()));",
+    "  const count = $('#master-presence-count', wrap);",
+    "  const list = $('#master-presence-list', wrap);",
+    "  const updated = $('#master-presence-updated', wrap);",
+    "  const now = Date.now();",
+    "  const hasPresenceField = candidates.some((user) => Object.prototype.hasOwnProperty.call(user, 'last_seen_at'));",
+    "  if (count) count.textContent = '—';",
+    "  if (!hasPresenceField && candidates.length) {",
+    "    if (list) list.innerHTML = `<p class=\"master-presence-message master-presence-error\">O serviço administrativo não retornou o campo <code>last_seen_at</code>. Aplique a migração SQL fornecida e confirme que a ação <code>get_users</code> retorna as colunas do perfil.</p>`;",
+    "    if (updated) updated.textContent = 'Configuração necessária';",
+    "    return;",
+    "  }",
+    "  const online = candidates.filter((user) => {",
+    "    const timestamp = new Date(user.last_seen_at || '').getTime();",
+    "    return Number.isFinite(timestamp) && now - timestamp >= -15000 && now - timestamp <= PRESENCE_ONLINE_WINDOW_MS;",
+    "  }).sort((a, b) => new Date(b.last_seen_at).getTime() - new Date(a.last_seen_at).getTime());",
+    "  if (count) count.textContent = String(online.length);",
+    "  if (updated) updated.textContent = `Atualizado às ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;",
+    "  if (!list) return;",
+    "  list.innerHTML = online.length ? online.map((user) => {",
+    "    const name = String(user.full_name || user.name || user.email || 'Professor');",
+    "    return `<article class=\"master-presence-person\"><span class=\"master-presence-avatar\">${escapeHTML(initials(name))}</span><div><strong>${escapeHTML(name)}</strong><small>${escapeHTML(user.email || 'Professor')}</small></div><span class=\"master-presence-last-seen\"><i></i>${escapeHTML(presenceAge(user.last_seen_at))}</span></article>`;",
+    "  }).join('') : `<p class=\"master-presence-message\">Nenhum professor ativo nos últimos ${Math.round(PRESENCE_ONLINE_WINDOW_MS / 1000 / 60)} minutos.</p>`;",
+    "  renderIcons(wrap);",
+    "}",
+    "",
+    "async function refreshMasterPresence() {",
+    "  if (!isMasterAccount() || masterPresenceRefreshBusy) return;",
+    "  masterPresenceRefreshBusy = true;",
+    "  try {",
+    "    const data = await invokeMasterAdmin('get_users', { include_blocked: true });",
+    "    renderMasterPresence(data.users || []);",
+    "  } catch (error) {",
+    "    const list = $('#master-presence-list');",
+    "    const updated = $('#master-presence-updated');",
+    "    if (list) list.innerHTML = `<p class=\"master-presence-message master-presence-error\">Não foi possível atualizar: ${escapeHTML(masterErrorMessage(error))}</p>`;",
+    "    if (updated) updated.textContent = 'Falha na atualização';",
+    "    console.warn('[Prisma presença] Falha ao consultar os professores logados:', error?.message || error);",
+    "  } finally {",
+    "    masterPresenceRefreshBusy = false;",
+    "  }",
+    "}",
+    "",
+    "async function updateTeacherPresence() {",
+    "  if (!state.user?.id || isMasterAccount() || document.visibilityState === 'hidden') return;",
+    "  try {",
+    "    const { error } = await supabase.from('profiles').update({ last_seen_at: new Date().toISOString() }).eq('id', state.user.id);",
+    "    if (error) {",
+    "      const msg = String(error.message || error);",
+    "      if (!presenceColumnWarningShown) {",
+    "        presenceColumnWarningShown = true;",
+    "        console.warn('[Prisma presença] A atualização de last_seen_at falhou. Confira a migração SQL e as políticas RLS de profiles:', msg);",
+    "      }",
+    "    }",
+    "  } catch (error) {",
+    "    if (!presenceColumnWarningShown) {",
+    "      presenceColumnWarningShown = true;",
+    "      console.warn('[Prisma presença] Falha ao atualizar a atividade:', error?.message || error);",
+    "    }",
+    "  }",
+    "}",
+    "",
+    "function stopPresenceMonitoring() {",
+    "  if (presenceHeartbeatTimer) clearInterval(presenceHeartbeatTimer);",
+    "  if (masterPresenceTimer) clearInterval(masterPresenceTimer);",
+    "  presenceHeartbeatTimer = null;",
+    "  masterPresenceTimer = null;",
+    "  presenceMonitorKey = '';",
+    "  $('#master-presence-widget')?.remove();",
+    "}",
+    "",
+    "function configurePresenceMonitoring() {",
+    "  if (!state.user?.id) {",
+    "    stopPresenceMonitoring();",
+    "    return;",
+    "  }",
+    "  const mode = isMasterAccount() ? 'master' : 'teacher';",
+    "  const key = `${state.user.id}:${mode}`;",
+    "  if (presenceMonitorKey === key) {",
+    "    if (mode === 'master') ensureMasterPresenceWidget();",
+    "    return;",
+    "  }",
+    "  if (presenceHeartbeatTimer) clearInterval(presenceHeartbeatTimer);",
+    "  if (masterPresenceTimer) clearInterval(masterPresenceTimer);",
+    "  presenceHeartbeatTimer = null;",
+    "  masterPresenceTimer = null;",
+    "  presenceMonitorKey = key;",
+    "  if (mode === 'master') {",
+    "    ensureMasterPresenceWidget();",
+    "    void refreshMasterPresence();",
+    "    masterPresenceTimer = window.setInterval(() => void refreshMasterPresence(), PRESENCE_INTERVAL_MS);",
+    "  } else {",
+    "    $('#master-presence-widget')?.remove();",
+    "    void updateTeacherPresence();",
+    "    presenceHeartbeatTimer = window.setInterval(() => void updateTeacherPresence(), PRESENCE_INTERVAL_MS);",
+    "  }",
+    "}",
+    "",
+    "function onPresenceResume() {",
+    "  if (state.user && !isMasterAccount() && document.visibilityState !== 'hidden') void updateTeacherPresence();",
+    "}",
+    "document.addEventListener('visibilitychange', onPresenceResume, { passive: true });",
+    "window.addEventListener('focus', onPresenceResume, { passive: true });",
     "",
     "function updatePersonIdentity() {",
     "  const name = profileName(state.profile, state.user);",
@@ -6455,6 +6809,7 @@ const SOURCES = {
     "  const masterNav = $('#master-nav');",
     "  masterNav?.classList.toggle('is-hidden', !isMasterAccount());",
     "  $('#topbar-date').textContent = new Intl.DateTimeFormat('pt-BR', { weekday: 'short', day: '2-digit', month: 'short' }).format(new Date());",
+    "  if (isMasterAccount()) ensureMasterPresenceWidget(); else $('#master-presence-widget')?.remove();",
     "}",
     "",
     "function renderAccessBlocked(reason = accountAccessBlockReason()) {",
@@ -6471,6 +6826,7 @@ const SOURCES = {
     "  $('#auth-view').classList.add('is-hidden');",
     "  $('#workspace').classList.remove('is-hidden');",
     "  updatePersonIdentity();",
+    "  configurePresenceMonitoring();",
     "  navigate(state.page, { replaceHistory: true });",
     "}",
     "",
@@ -6501,6 +6857,12 @@ const SOURCES = {
     "}",
     "",
     "function renderPage() {",
+    "  if (termsAcceptanceRequired() && state.page !== 'terms') {",
+    "    state.page = 'terms';",
+    "    activeStudentDetailId = null;",
+    "    history.replaceState({ page: 'terms' }, '', '#terms');",
+    "  }",
+    "  $('#workspace')?.classList.toggle('terms-required', termsAcceptanceRequired());",
     "  const accessBlock = accountAccessBlockReason();",
     "  const renderer = PAGE_RENDERERS[state.page] || renderDashboard;",
     "  const content = $('#page-content');",
@@ -6536,6 +6898,7 @@ const SOURCES = {
     "  }",
     "  renderIcons(content);",
     "  content.focus({ preventScroll: true });",
+    "  if (state.page === 'terms') queueMicrotask(() => bindTermsPageInputs());",
     "  if (state.page === 'activities') queueMicrotask(() => hydrateActivitiesPage());",
     "  if (state.page === 'muralia') queueMicrotask(() => bindMuraliaControls());",
     "}",
@@ -6544,6 +6907,7 @@ const SOURCES = {
     "  if (page === 'progress') page = 'students'; // Página antiga redirecionada: evolução agora vive no prontuário do aluno.",
     "  if (!PAGE_RENDERERS[page]) page = 'dashboard';",
     "  if (accountAccessBlockReason()) { renderPage(); return; }",
+    "  if (termsAcceptanceRequired() && page !== 'terms') { page = 'terms'; replaceHistory = true; }",
     "  if (page === 'admin' && !isMasterAccount()) { toast('Área restrita', 'error', 'Esta página é exclusiva da conta master.'); page = 'dashboard'; }",
     "  activeStudentDetailId = null;",
     "  state.page = page;",
@@ -8138,6 +8502,8 @@ const SOURCES = {
     "    case 'master-extend-access': await masterExtendAccess(id); break;",
     "    case 'master-refresh': await loadMasterAdmin(); break;",
     "    case 'blocked-logout': await handleLogout(); break;",
+    "    case 'accept-terms': await acceptCurrentTerms(); break;",
+    "    case 'presence-refresh': await refreshMasterPresence(); break;",
     "    case 'new-appointment': showAppointmentForm(null, target.dataset.studentId || ''); break;",
     "    case 'edit-appointment': editAppointment(id); break;",
     "    case 'open-appointment': openAppointment(id); break;",
@@ -8377,6 +8743,7 @@ const SOURCES = {
     "  try {",
     "    await signOut();",
     "    clearSensitiveState();",
+    "    stopPresenceMonitoring();",
     "    $('#modal-root').replaceChildren();",
     "    showAuthentication();",
     "    toast('Sessão encerrada', 'success');",
@@ -8467,6 +8834,7 @@ const SOURCES = {
     "supabase.auth.onAuthStateChange((event, session) => {",
     "  if (event === 'SIGNED_OUT' && !session && state.user) {",
     "    clearSensitiveState();",
+    "    stopPresenceMonitoring();",
     "    showAuthentication();",
     "  }",
     "});",
@@ -8492,7 +8860,7 @@ const SOURCES = {
     "safeInitPage();",
     "renderIcons();",
     "boot();",
-    ""
+    "",
   ].join("\n"),
   "pages/muralia.js": [
     "import { state } from '../core/store.js';",
@@ -8587,7 +8955,7 @@ const SOURCES = {
     "    <section class=\"panel\"><header class=\"panel-header\"><div><span class=\"eyebrow\">PRÓXIMAS DATAS</span><h2>Próximos aniversariantes</h2><p>Previsão para os próximos 30 dias.</p></div><span class=\"count-chip\">${upcoming.length}</span></header><div class=\"muralia-birthday-list\">${birthdaysUpcoming}</div></section></div>`;",
     "}",
     "",
-    ""
+    "",
   ].join("\n"),
   "pages/activities.js": [
     "import { supabase } from '../core/supabase.js';",
@@ -8660,7 +9028,7 @@ const SOURCES = {
     "  const rows = list.length ? `<div class=\"admin-activity-list\">${list.map((item) => `<article class=\"admin-activity-row\">${item.image_url ? `<img class=\"admin-activity-thumb\" src=\"${escapeHTML(item.image_url)}\" alt=\"Imagem de ${escapeHTML(item.title)}\" loading=\"lazy\" referrerpolicy=\"no-referrer\">` : `<span class=\"admin-activity-thumb admin-activity-thumb-empty\"><i data-lucide=\"image\"></i></span>`}<div class=\"admin-activity-copy\"><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.url)}</small>${item.description ? `<p>${escapeHTML(item.description)}</p>` : ''}<span class=\"status-badge status-info\">${escapeHTML(item.category || 'Material psicopedagógico')}</span>${item.image_url ? `<small>Imagem: ${escapeHTML(item.image_url)}</small>` : '<small>Sem imagem de capa</small>'}</div><div class=\"admin-activity-actions\"><button type=\"button\" class=\"button button-secondary button-small\" data-action=\"master-edit-activity\" data-id=\"${escapeHTML(item.id)}\"><i data-lucide=\"pencil\"></i>Editar</button><button type=\"button\" class=\"button button-secondary button-small danger-action\" data-action=\"master-delete-activity\" data-id=\"${escapeHTML(item.id)}\"><i data-lucide=\"trash-2\"></i>Remover link</button></div></article>`).join('')}</div>` : '<p class=\"empty-inline\">Nenhum link cadastrado. Adicione o primeiro abaixo.</p>';",
     "  return `<div class=\"admin-activity-toolbar\"><div><h3>Links cadastrados (${list.length})</h3><p>Você pode incluir uma imagem de capa por URL. Os PDFs e as imagens continuam hospedados nos sites de origem.</p></div><button type=\"button\" class=\"button button-primary\" data-action=\"master-new-activity\"><i data-lucide=\"plus\"></i>Adicionar atividade</button></div>${rows}`;",
     "}",
-    ""
+    "",
   ].join("\n")
 };
 const urls = new Map();
