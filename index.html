@@ -4394,6 +4394,22 @@ body {
 @media(max-width:900px){.mood-options{grid-template-columns:repeat(4,minmax(0,1fr))}.muralia-birthday-layout,.activities-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:650px){.muralia-intro{align-items:flex-start;padding:16px;gap:12px}.muralia-intro-icon{width:44px;height:44px;flex-basis:44px;font-size:23px;border-radius:14px}.muralia-compose-grid{grid-template-columns:minmax(0,1fr)}.muralia-compose-grid .field-full{grid-column:auto}.muralia-privacy-note{display:none}.muralia-compose-actions,.muralia-compose-actions .button{width:100%}.muralia-birthday-item{align-items:flex-start;flex-wrap:wrap}.muralia-birthday-main{padding-top:2px}.muralia-birthday-item .button{width:100%;justify-content:center}.mood-options{grid-template-columns:repeat(3,minmax(0,1fr))}.mood-option{min-height:72px}.activities-intro{padding:15px}.activity-card{padding:16px}.activity-card-footer{align-items:stretch;flex-direction:column}.activity-card-footer a{width:100%;justify-content:center}.admin-activity-row{align-items:stretch;flex-direction:column}.admin-activity-actions,.admin-activity-actions .button{width:100%}}
 
+
+/* Ajuste visual: capas da biblioteca de atividades sem estourar os cards. */
+.activity-card-image-wrap{display:block;width:100%;height:132px;max-height:132px;overflow:hidden;border-radius:11px;background:var(--surface-soft,#f4f7f5);position:relative;flex:0 0 auto}
+.activity-card-image{display:block;width:100%;height:100%;max-width:100%;max-height:132px;object-fit:cover;object-position:center;border-radius:11px}
+.activity-card-image-wrap.is-image-broken{display:none}
+.activities-grid .activity-card{overflow:hidden;padding:16px;gap:9px}
+.admin-activity-row{overflow:hidden}
+.admin-activity-thumb{display:block;flex:0 0 88px;width:88px;height:66px;max-width:88px;max-height:66px;object-fit:cover;object-position:center;border-radius:9px;background:var(--surface-soft,#f4f7f5)}
+.admin-activity-thumb-empty{display:grid;place-items:center;color:var(--muted,#64748b);font-size:20px}
+.admin-activity-copy{flex:1;min-width:0;overflow-wrap:anywhere}
+.admin-activity-copy small{display:block;overflow-wrap:anywhere;word-break:break-word}
+.intervention-card-actions{display:flex!important;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+.intervention-card-actions .button,.intervention-card-actions .table-action{flex:0 0 auto;white-space:nowrap}
+.intervention-card-actions .delete-intervention-template-button{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:6px 10px;border:1px solid #e7b7b4;border-radius:9px;background:#fff7f6;color:#a12d27;font-size:12px;font-weight:700;cursor:pointer}
+.intervention-card-actions .delete-intervention-template-button:hover{background:#feeceb;border-color:#d9908b}
+@media(max-width:650px){.activity-card-image-wrap{height:112px;max-height:112px}.activity-card-image{max-height:112px}.activities-grid{grid-template-columns:minmax(0,1fr)}.admin-activity-thumb{flex-basis:72px;width:72px;height:58px;max-width:72px;max-height:58px}.intervention-card-actions{justify-content:flex-start;width:100%}.intervention-card-actions .button{width:auto;flex:0 1 auto}.intervention-card-actions .delete-intervention-template-button{flex:0 0 auto}}
 </style>
 </head>
 <body>
@@ -6989,23 +7005,7 @@ const SOURCES = {
     "    return;",
     "  }",
     "  popup.opener = null;",
-    "  popup.document.write(`<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><title>${escapeHTML(title)}</title><style>body{font-family:Arial,sans-serif;color:#222;padding:42px;max-width:850px;margin:auto}h1{font-size:20px}pre{font:14px/1.8 Arial,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}@media print{button{display:none}body{padding:0}}
-/* Ajuste visual: capas da biblioteca de atividades sem estourar os cards. */
-.activity-card-image-wrap{display:block;width:100%;height:132px;max-height:132px;overflow:hidden;border-radius:11px;background:var(--surface-soft,#f4f7f5);position:relative;flex:0 0 auto}
-.activity-card-image{display:block;width:100%;height:100%;max-width:100%;max-height:132px;object-fit:cover;object-position:center;border-radius:11px}
-.activity-card-image-wrap.is-image-broken{display:none}
-.activities-grid .activity-card{overflow:hidden;padding:16px;gap:9px}
-.admin-activity-row{overflow:hidden}
-.admin-activity-thumb{display:block;flex:0 0 88px;width:88px;height:66px;max-width:88px;max-height:66px;object-fit:cover;object-position:center;border-radius:9px;background:var(--surface-soft,#f4f7f5)}
-.admin-activity-thumb-empty{display:grid;place-items:center;color:var(--muted,#64748b);font-size:20px}
-.admin-activity-copy{flex:1;min-width:0;overflow-wrap:anywhere}
-.admin-activity-copy small{display:block;overflow-wrap:anywhere;word-break:break-word}
-.intervention-card-actions{display:flex!important;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
-.intervention-card-actions .button,.intervention-card-actions .table-action{flex:0 0 auto;white-space:nowrap}
-.intervention-card-actions .delete-intervention-template-button{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:6px 10px;border:1px solid #e7b7b4;border-radius:9px;background:#fff7f6;color:#a12d27;font-size:12px;font-weight:700;cursor:pointer}
-.intervention-card-actions .delete-intervention-template-button:hover{background:#feeceb;border-color:#d9908b}
-@media(max-width:650px){.activity-card-image-wrap{height:112px;max-height:112px}.activity-card-image{max-height:112px}.activities-grid{grid-template-columns:minmax(0,1fr)}.admin-activity-thumb{flex-basis:72px;width:72px;height:58px;max-width:72px;max-height:58px}.intervention-card-actions{justify-content:flex-start;width:100%}.intervention-card-actions .button{width:auto;flex:0 1 auto}.intervention-card-actions .delete-intervention-template-button{flex:0 0 auto}}
-</style></head><body><button onclick=\"window.print()\">Imprimir / salvar em PDF</button><h1>${escapeHTML(title)}</h1><pre>${escapeHTML(documentText)}</pre><script>window.addEventListener('load',()=>window.setTimeout(()=>window.print(),300));<\\/script></body></html>`);",
+    "  popup.document.write(`<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><title>${escapeHTML(title)}</title><style>body{font-family:Arial,sans-serif;color:#222;padding:42px;max-width:850px;margin:auto}h1{font-size:20px}pre{font:14px/1.8 Arial,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}@media print{button{display:none}body{padding:0}}</style></head><body><button onclick=\"window.print()\">Imprimir / salvar em PDF</button><h1>${escapeHTML(title)}</h1><pre>${escapeHTML(documentText)}</pre><script>window.addEventListener('load',()=>window.setTimeout(()=>window.print(),300));<\\/script></body></html>`);",
     "  popup.document.close();",
     "}",
     "",
