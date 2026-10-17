@@ -4410,7 +4410,45 @@ body {
 .intervention-card-actions .delete-intervention-template-button{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:6px 10px;border:1px solid #e7b7b4;border-radius:9px;background:#fff7f6;color:#a12d27;font-size:12px;font-weight:700;cursor:pointer}
 .intervention-card-actions .delete-intervention-template-button:hover{background:#feeceb;border-color:#d9908b}
 @media(max-width:650px){.activity-card-image-wrap{height:112px;max-height:112px}.activity-card-image{max-height:112px}.activities-grid{grid-template-columns:minmax(0,1fr)}.admin-activity-thumb{flex-basis:72px;width:72px;height:58px;max-width:72px;max-height:58px}.intervention-card-actions{justify-content:flex-start;width:100%}.intervention-card-actions .button{width:auto;flex:0 1 auto}.intervention-card-actions .delete-intervention-template-button{flex:0 0 auto}}
+
+/* Biblioteca de atividades: cards compactos para catálogos extensos. */
+.activities-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;align-items:stretch}
+.activities-grid .activity-card{padding:12px!important;gap:7px!important;border-radius:13px!important;box-shadow:0 3px 10px rgb(24 56 43 / 4%)!important}
+.activity-card-image-wrap{height:78px!important;max-height:78px!important;border-radius:8px!important}
+.activity-card-image{max-height:78px!important;border-radius:8px!important}
+.activity-card-icon{width:32px!important;height:32px!important;border-radius:9px!important}
+.activities-grid .activity-card h3{font-size:15px!important;line-height:1.35!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:0}
+.activities-grid .activity-card p{font-size:12px!important;line-height:1.45!important;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:0}
+.activities-grid .activity-card .eyebrow{font-size:9px!important;letter-spacing:.04em}
+.activity-card-footer{align-items:flex-start!important;flex-direction:column!important;gap:7px!important;padding-top:5px!important}
+.activity-card-footer a{width:100%!important;min-height:34px!important;padding:7px 9px!important;justify-content:center!important;font-size:11px!important;white-space:normal!important;text-align:center}
+.activity-card-footer>span{font-size:10px!important}
+.master-activities-panel{margin-top:16px}
+.master-activity-form{padding:14px}
+.admin-activity-row{padding:10px!important;gap:10px!important}
+.admin-activity-thumb{flex-basis:64px!important;width:64px!important;height:48px!important;max-width:64px!important;max-height:48px!important}
+.admin-activity-copy small{font-size:10px!important}
+@media(max-width:1050px){.activities-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:520px){.activities-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}.activities-grid .activity-card{padding:9px!important;gap:6px!important}.activity-card-image-wrap{height:66px!important;max-height:66px!important}.activity-card-image{max-height:66px!important}.activities-grid .activity-card h3{font-size:13px!important}.activities-grid .activity-card p{font-size:11px!important;-webkit-line-clamp:2}.activity-card-footer a{font-size:10px!important;padding:6px!important;min-height:32px!important}.activity-card-footer>span{font-size:9px!important}}
 </style>
+<script>
+(function sanitizeCredentialQuery() {
+  try {
+    const url = new URL(window.location.href);
+    const secretNames = new Set(['password', 'passwd', 'pass', 'token', 'access_token', 'refresh_token']);
+    const hasSecret = [...url.searchParams.keys()].some((key) => secretNames.has(key.toLowerCase()));
+    if (!hasSecret) return;
+    for (const key of [...url.searchParams.keys()]) {
+      const lower = key.toLowerCase();
+      if (secretNames.has(lower) || lower === 'email' || lower === 'username') url.searchParams.delete(key);
+    }
+    const next = url.pathname + (url.search ? `?${url.searchParams.toString()}` : '') + url.hash;
+    window.history.replaceState(window.history.state, '', next);
+  } catch (error) {
+    console.warn('[Prisma] Não foi possível limpar parâmetros sensíveis da URL.', error);
+  }
+})();
+</script>
 </head>
 <body>
   <div id="app-root">
@@ -6494,6 +6532,7 @@ const SOURCES = {
     "    content.innerHTML = `<nav class=\"page-breadcrumb\" aria-label=\"Caminho da página\"><button type=\"button\" class=\"breadcrumb-back\" data-navigate=\"students\"><i data-lucide=\"arrow-left\"></i><span>Alunos e prontuários</span></button><span class=\"breadcrumb-separator\">/</span><span class=\"breadcrumb-current\">Prontuário de ${escapeHTML(studentName(currentStudent))}</span></nav><div class=\"student-profile-page\">${studentDetails(enriched)}</div>`;",
     "  } else {",
     "    content.innerHTML = renderer();",
+    "    if (state.page === 'activities' && isMasterAccount()) content.insertAdjacentHTML('beforeend', `<section class=\"panel master-activities-panel\"><header class=\"panel-header\"><div><h2>Biblioteca de atividades por link</h2><p>Administre os materiais diretamente nesta página. As alterações ficam disponíveis aos professores autorizados.</p></div></header><div id=\"master-activities-root\"><p class=\"muted\">Carregando biblioteca de atividades…</p></div></section>`);",
     "  }",
     "  renderIcons(content);",
     "  content.focus({ preventScroll: true });",
@@ -6892,23 +6931,37 @@ const SOURCES = {
     "}",
     "",
     "async function deleteInterventionTemplate(id) {",
+    "  const userId = String(state.user?.id || '');",
+    "  if (!userId) return toast('Sua sessão expirou', 'error', 'Entre novamente para excluir o modelo.');",
     "  try {",
-    "    const templates = await currentInterventionTemplates();",
+    "    // Sempre consulte a versão atual no Supabase; não use uma lista local desatualizada para excluir.",
+    "    const templates = await loadInterventionTemplates(userId);",
     "    const item = templates.find((entry) => String(entry.id) === String(id));",
-    "    if (!item) { renderPage(); return toast('Modelo não encontrado', 'warning', 'A biblioteca foi atualizada; confira a lista atual.'); }",
-    "    const accepted = await confirmDialog({ title: 'Excluir modelo da biblioteca?', message: `O modelo “${item.title}” será removido da sua biblioteca. As aplicações já registradas nos prontuários serão preservadas.`, confirmText: 'Excluir modelo', danger: true });",
+    "    if (!item) {",
+    "      state.user = { ...state.user, user_metadata: { ...(state.user.user_metadata || {}), prisma_intervention_library: templates } };",
+    "      renderPage();",
+    "      return toast('Modelo não encontrado', 'warning', 'A biblioteca foi atualizada. Confira a lista atual.');",
+    "    }",
+    "    const accepted = window.confirm(`Excluir o modelo “${item.title}” da biblioteca? Os registros já vinculados aos alunos serão preservados.`);",
     "    if (!accepted) return;",
     "    const remaining = templates.filter((entry) => String(entry.id) !== String(id));",
-    "    const saved = await saveInterventionTemplates(state.user.id, remaining);",
-    "    state.user = { ...state.user, user_metadata: { ...(state.user.user_metadata || {}), prisma_intervention_library: saved.templates } };",
+    "    const saved = await saveInterventionTemplates(userId, remaining);",
+    "    if (saved.templates.some((entry) => String(entry.id) === String(id))) {",
+    "      throw new Error('O Supabase retornou a intervenção na lista depois da exclusão. Tente novamente e confira a sessão.');",
+    "    }",
+    "    const latestUser = saved.user || state.user;",
+    "    state.user = {",
+    "      ...state.user,",
+    "      ...latestUser,",
+    "      user_metadata: { ...(latestUser.user_metadata || state.user.user_metadata || {}), prisma_intervention_library: saved.templates },",
+    "    };",
     "    renderPage();",
-    "    toast('Modelo excluído', 'success', 'O modelo foi removido da biblioteca. Os registros vinculados aos alunos foram preservados.');",
+    "    toast('Intervenção excluída', 'success', 'O modelo foi removido da biblioteca. Os registros dos prontuários foram preservados.');",
     "  } catch (error) {",
     "    console.error('[Prisma] Falha ao excluir modelo de intervenção:', error);",
-    "    toast('Não foi possível excluir o modelo', 'error', error?.message || 'Confira sua sessão e tente novamente.');",
+    "    toast('Não foi possível excluir a intervenção', 'error', error?.message || 'Confira a sessão e as permissões de atualização da conta no Supabase.');",
     "  }",
     "}",
-    "",
     "async function showUseInterventionTemplate(id) {",
     "  const templates = await currentInterventionTemplates();",
     "  const template = templates.find((entry) => String(entry.id) === String(id));",
@@ -7525,12 +7578,13 @@ const SOURCES = {
     "    if (!$('#activities-list-root')) return;",
     "    root.innerHTML = renderActivityCards(activities);",
     "    renderIcons(root);",
+    "    if (isMasterAccount()) await loadMasterActivities();",
     "  } catch (error) {",
     "    root.innerHTML = `<div class=\"activities-load-error\"><i data-lucide=\"cloud-off\"></i><h3>Não foi possível carregar as atividades</h3><p>${escapeHTML(error?.message || 'Confira a permissão de leitura do cadastro de atividades no Supabase.')}</p></div>`;",
     "    renderIcons(root);",
+    "    if (isMasterAccount()) await loadMasterActivities();",
     "  }",
     "}",
-    "",
     "function currentMuraliaStudent() {",
     "  const studentId = $('#muralia-student-select')?.value;",
     "  return state.students.find((student) => String(student.id) === String(studentId)) || null;",
@@ -7606,16 +7660,9 @@ const SOURCES = {
     "",
     "function showMasterActivitiesLibrary() {",
     "  if (!isMasterAccount()) return toast('Acesso restrito', 'error');",
-    "  const page = openSubpage({",
-    "    key: 'biblioteca-atividades-por-link', title: 'Biblioteca de atividades por link',",
-    "    subtitle: 'Cadastre somente links externos e, se desejar, uma imagem de capa por URL. Os PDFs permanecem hospedados no site de origem.',",
-    "    parentPage: 'admin',",
-    "    body: `<section class=\"activities-intro panel\"><span class=\"activities-intro-symbol\"><i data-lucide=\"library-big\"></i></span><div><h2>Biblioteca compartilhada com os professores</h2><p>Os materiais cadastrados aqui aparecem na página Atividades de todos os professores autorizados. A administração guarda título, link, categoria, descrição e URL opcional da imagem — não hospeda arquivos.</p></div></section><div id=\"master-activities-root\"><p class=\"muted\">Carregando biblioteca…</p></div>`,",
-    "    footer: '<button type=\"button\" class=\"button button-secondary\" data-subpage-back>Voltar à Administração</button>',",
-    "  });",
-    "  queueMicrotask(() => { if ($('#master-activities-root', page.element)) loadMasterActivities(); });",
+    "  navigate('activities');",
+    "  queueMicrotask(() => $('#master-activities-root')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));",
     "}",
-    "",
     "function showMasterActivityForm(existing = null) {",
     "  if (!isMasterAccount()) return toast('Acesso restrito', 'error');",
     "  const item = existing || {};",
@@ -7624,11 +7671,11 @@ const SOURCES = {
     "    key: `biblioteca-atividade-${item.id || 'nova'}`,",
     "    title: editing ? 'Editar atividade da biblioteca' : 'Adicionar atividade à biblioteca',",
     "    subtitle: 'Informe o link do PDF ou do material externo. A imagem é opcional e deve ser um endereço HTTPS/HTTP direto para uma imagem.',",
-    "    parentPage: 'admin',",
-    "    parentLabel: 'Biblioteca de atividades por link',",
+    "    parentPage: state.page === 'activities' ? 'activities' : 'admin',",
+    "    parentLabel: state.page === 'activities' ? 'Atividades' : 'Biblioteca de atividades por link',",
     "    body: `<form id=\"master-activity-form\" class=\"master-activity-form\"><input type=\"hidden\" name=\"activity_id\" value=\"${escapeHTML(item.id || '')}\"><div class=\"form-grid\"><label class=\"field\"><span>Título da atividade *</span><input name=\"title\" required maxlength=\"120\" value=\"${escapeHTML(item.title || '')}\" placeholder=\"Ex.: Sondagem de leitura para imprimir\"></label><label class=\"field\"><span>Link externo para PDF ou material *</span><input name=\"url\" type=\"url\" inputmode=\"url\" required value=\"${escapeHTML(item.url || '')}\" placeholder=\"https://site.com/arquivo.pdf\"></label><label class=\"field\"><span>Imagem de capa por URL (opcional)</span><input name=\"image_url\" type=\"url\" inputmode=\"url\" value=\"${escapeHTML(item.image_url || '')}\" placeholder=\"https://site.com/imagem.jpg\"><small>Use uma URL pública de imagem; o Prisma não faz upload nem copia a imagem.</small></label><label class=\"field\"><span>Categoria (opcional)</span><input name=\"category\" maxlength=\"80\" value=\"${escapeHTML(item.category || '')}\" placeholder=\"Leitura, escrita, matemática…\"></label><label class=\"field field-full\"><span>Orientação curta (opcional)</span><textarea name=\"description\" rows=\"3\" maxlength=\"500\" placeholder=\"Faixa etária, objetivo ou informação importante sobre o material\">${escapeHTML(item.description || '')}</textarea></label></div><div class=\"activity-image-preview-wrap\" id=\"activity-image-preview-wrap\"${item.image_url ? '' : ' hidden'}>${item.image_url ? `<img id=\"activity-image-preview\" src=\"${escapeHTML(item.image_url)}\" alt=\"Prévia da imagem de capa\">` : '<img id=\"activity-image-preview\" alt=\"Prévia da imagem de capa\">'}</div></form>`,",
     "    footer: `<button type=\"button\" class=\"button button-secondary\" data-subpage-back>Cancelar</button><button type=\"submit\" form=\"master-activity-form\" class=\"button button-primary\"><i data-lucide=\"save\"></i>${editing ? 'Salvar alterações' : 'Adicionar link'}</button>`,",
-    "    onClose: () => showMasterActivitiesLibrary(),",
+    "    onClose: () => { if (state.page !== 'activities') showMasterActivitiesLibrary(); },",
     "  });",
     "  const form = $('#master-activity-form', page.element);",
     "  const imageInput = $('input[name=\"image_url\"]', form);",
@@ -7708,7 +7755,7 @@ const SOURCES = {
     "    if (filter && !filter.dataset.bound) { filter.dataset.bound = '1'; filter.addEventListener('change', renderMasterTeacherRows); }",
     "    loadMasterAdmin();",
     "  });",
-    "  return `${pageHeader({ title: 'Administração da plataforma', description: 'Gerencie os professores, crie acessos, defina planos e pagamentos, bloqueie contas e programe vencimentos.', action: '<button class=\"button button-primary\" data-action=\"master-new-teacher\"><i data-lucide=\"user-plus\"></i>Cadastrar professor</button>' })}<div id=\"master-admin-kpis\" class=\"master-kpi-grid\"><div class=\"master-kpi\"><span>Professores</span><strong>—</strong></div><div class=\"master-kpi\"><span>Bloqueados / vencidos</span><strong>—</strong></div><div class=\"master-kpi\"><span>Pagamentos registrados</span><strong>—</strong></div></div><section class=\"panel master-admin-panel\"><header class=\"panel-header\"><div><h2>Professores e permissões</h2><p>Os vencimentos são usados para sinalizar e suspender o acesso nesta interface.</p></div><button class=\"button button-secondary\" data-action=\"master-refresh\"><i data-lucide=\"refresh-cw\"></i>Atualizar</button></header><div class=\"master-admin-filters\"><label class=\"field\"><span>Buscar professor</span><input id=\"master-teacher-search\" type=\"search\" placeholder=\"Nome, e-mail ou telefone\"></label><label class=\"field\"><span>Filtrar acesso</span><select id=\"master-teacher-filter\"><option value=\"all\">Todos</option><option value=\"active\">Ativos</option><option value=\"expiring\">Vencendo em breve</option><option value=\"blocked\">Bloqueados / vencidos</option></select></label></div><div id=\"master-teachers-root\"><p>Carregando...</p></div></section><section class=\"panel master-admin-panel master-activities-panel\"><header class=\"panel-header\"><div><h2>Biblioteca de atividades por link</h2><p>Gerencie materiais externos com título, categoria, descrição e imagem de capa por URL.</p></div><button type=\"button\" class=\"button button-primary\" data-action=\"master-open-activities\"><i data-lucide=\"library-big\"></i>Abrir biblioteca</button></header><p class=\"muted\">Os professores visualizam os links publicados na página Atividades. Os arquivos e imagens permanecem hospedados nos sites de origem.</p></section>`;",
+    "  return `${pageHeader({ title: 'Administração da plataforma', description: 'Gerencie os professores, crie acessos, defina planos e pagamentos, bloqueie contas e programe vencimentos.', action: '<button class=\"button button-primary\" data-action=\"master-new-teacher\"><i data-lucide=\"user-plus\"></i>Cadastrar professor</button>' })}<div id=\"master-admin-kpis\" class=\"master-kpi-grid\"><div class=\"master-kpi\"><span>Professores</span><strong>—</strong></div><div class=\"master-kpi\"><span>Bloqueados / vencidos</span><strong>—</strong></div><div class=\"master-kpi\"><span>Pagamentos registrados</span><strong>—</strong></div></div><section class=\"panel master-admin-panel\"><header class=\"panel-header\"><div><h2>Professores e permissões</h2><p>Os vencimentos são usados para sinalizar e suspender o acesso nesta interface.</p></div><button class=\"button button-secondary\" data-action=\"master-refresh\"><i data-lucide=\"refresh-cw\"></i>Atualizar</button></header><div class=\"master-admin-filters\"><label class=\"field\"><span>Buscar professor</span><input id=\"master-teacher-search\" type=\"search\" placeholder=\"Nome, e-mail ou telefone\"></label><label class=\"field\"><span>Filtrar acesso</span><select id=\"master-teacher-filter\"><option value=\"all\">Todos</option><option value=\"active\">Ativos</option><option value=\"expiring\">Vencendo em breve</option><option value=\"blocked\">Bloqueados / vencidos</option></select></label></div><div id=\"master-teachers-root\"><p>Carregando...</p></div></section>`;",
     "}",
     "",
     "function masterDateToISO(value) {",
@@ -8139,6 +8186,29 @@ const SOURCES = {
     "    case 'export-waitlist': exportWaitlist(); break;",
     "    case 'finance-monthly-report': showMonthlyFinanceReport(); break;",
     "    case 'print-report': {",
+    "      const schoolReport = $('#school-report-print');",
+    "      if (schoolReport) {",
+    "        const printWindow = window.open('about:blank', '_blank');",
+    "        if (!printWindow) {",
+    "          toast('A impressão foi bloqueada', 'warning', 'Permita a abertura da janela de impressão e tente novamente.');",
+    "          break;",
+    "        }",
+    "        const css = Array.from(document.querySelectorAll('style')).map((style) => style.textContent || '').join('\\n');",
+    "        let printed = false;",
+    "        const performPrint = () => {",
+    "          if (printed) return;",
+    "          printed = true;",
+    "          printWindow.focus();",
+    "          window.setTimeout(() => printWindow.print(), 250);",
+    "        };",
+    "        printWindow.onload = performPrint;",
+    "        printWindow.onafterprint = () => printWindow.close();",
+    "        printWindow.document.open();",
+    "        printWindow.document.write(`<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Relatório descritivo de acompanhamento educacional</title><style>${css}\\n@page{size:auto;margin:0!important}html,body{margin:0!important;padding:0!important;background:#fff!important}.school-report-document{box-sizing:border-box;width:100%!important;max-width:none!important;margin:0!important;padding:14mm!important;border:0!important;border-radius:0!important;box-shadow:none!important;color:#111!important;background:#fff!important}@media print{body{margin:0!important;padding:0!important}.school-report-document{padding:14mm!important;border:0!important;box-shadow:none!important}}</style></head><body>${schoolReport.outerHTML}</body></html>`);",
+    "        printWindow.document.close();",
+    "        window.setTimeout(() => { if (!printed && printWindow.document.readyState === 'complete') performPrint(); }, 700);",
+    "        break;",
+    "      }",
     "      const isFinanceReport = Boolean($('#finance-report-print'));",
     "      if (isFinanceReport) { document.body.classList.add('printing-finance-report'); window.addEventListener('afterprint', () => document.body.classList.remove('printing-finance-report'), { once: true }); }",
     "      window.print();",
