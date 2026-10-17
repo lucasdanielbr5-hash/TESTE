@@ -6116,7 +6116,7 @@ const SOURCES = {
     "  const needle = normalizeSearch(query);",
     "  const filtered = templates.filter((entry) => [entry.title, entry.area, entry.description, entry.content, entry.next_step].map(normalizeSearch).join(' ').includes(needle));",
     "  if (!filtered.length) return emptyState({ icon: 'notebook-pen', title: 'Nenhuma intervenção na biblioteca', message: 'Cadastre estratégias reutilizáveis. Elas só serão vinculadas a um aluno quando você escolher “Vincular a aluno”.' });",
-    "  return `<div class=\"intervention-grid\">${filtered.map((entry) => `<article class=\"intervention-card reusable-intervention-card\"><div class=\"intervention-card-top\"><span class=\"intervention-card-icon\"><i data-lucide=\"library-big\"></i></span><span class=\"status-badge status-info\">Modelo reutilizável</span></div>${entry.area ? `<span class=\"eyebrow\">${escapeHTML(entry.area)}</span>` : ''}<h3>${escapeHTML(entry.title)}</h3>${entry.description ? `<p class=\"preserve-lines\">${escapeHTML(normalizeLineBreaks(entry.description))}</p>` : ''}<div class=\"intervention-template-preview preserve-lines\">${escapeHTML(normalizeLineBreaks(entry.content).slice(0, 260))}${String(entry.content || '').length > 260 ? '…' : ''}</div><div class=\"intervention-card-footer\"><span><i data-lucide=\"calendar\"></i>${formatDate(entry.updated_at || entry.created_at)}</span><span class=\"intervention-card-actions\"><button class=\"button button-primary button-small\" data-action=\"use-intervention-template\" data-id=\"${escapeHTML(entry.id)}\"><i data-lucide=\"user-round-plus\"></i>Vincular a aluno</button><button class=\"table-action\" data-action=\"edit-intervention-template\" data-id=\"${escapeHTML(entry.id)}\" aria-label=\"Editar modelo\"><i data-lucide=\"pencil\"></i></button><button class=\"table-action danger-action\" data-action=\"delete-intervention-template\" data-id=\"${escapeHTML(entry.id)}\" aria-label=\"Excluir modelo\"><i data-lucide=\"trash-2\"></i></button></span></div></article>`).join('')}</div>`;",
+    "  return `<div class=\"intervention-grid\">${filtered.map((entry) => `<article class=\"intervention-card reusable-intervention-card\"><div class=\"intervention-card-top\"><span class=\"intervention-card-icon\"><i data-lucide=\"library-big\"></i></span><span class=\"status-badge status-info\">Modelo reutilizável</span></div>${entry.area ? `<span class=\"eyebrow\">${escapeHTML(entry.area)}</span>` : ''}<h3>${escapeHTML(entry.title)}</h3>${entry.description ? `<p class=\"preserve-lines\">${escapeHTML(normalizeLineBreaks(entry.description))}</p>` : ''}<div class=\"intervention-template-preview preserve-lines\">${escapeHTML(normalizeLineBreaks(entry.content).slice(0, 260))}${String(entry.content || '').length > 260 ? '…' : ''}</div><div class=\"intervention-card-footer\"><span><i data-lucide=\"calendar\"></i>${formatDate(entry.updated_at || entry.created_at)}</span><span class=\"intervention-card-actions\"><button class=\"button button-primary button-small\" data-action=\"use-intervention-template\" data-id=\"${escapeHTML(entry.id)}\"><i data-lucide=\"user-round-plus\"></i>Vincular a aluno</button><button class=\"table-action\" data-action=\"edit-intervention-template\" data-id=\"${escapeHTML(entry.id)}\" aria-label=\"Editar modelo\"><i data-lucide=\"pencil\"></i></button><button type=\"button\" class=\"delete-intervention-template-button\" data-action=\"delete-intervention-template\" data-id=\"${escapeHTML(entry.id)}\" aria-label=\"Excluir modelo de intervenção\"><i data-lucide=\"trash-2\"></i><span>Excluir</span></button></span></div></article>`).join('')}</div>`;",
     "}",
     "",
     "function linkedList(records, query = '') {",
@@ -6876,17 +6876,21 @@ const SOURCES = {
     "}",
     "",
     "async function deleteInterventionTemplate(id) {",
-    "  const templates = await currentInterventionTemplates();",
-    "  const item = templates.find((entry) => String(entry.id) === String(id));",
-    "  if (!item) return toast('Modelo não encontrado', 'warning');",
-    "  const accepted = await confirmDialog({ title: 'Excluir modelo da biblioteca?', message: 'Isso remove somente o modelo reutilizável. Aplicações já registradas nos prontuários dos alunos serão preservadas.', confirmText: 'Excluir modelo', danger: true });",
-    "  if (!accepted) return;",
     "  try {",
-    "    const saved = await saveInterventionTemplates(state.user.id, templates.filter((entry) => String(entry.id) !== String(id)));",
+    "    const templates = await currentInterventionTemplates();",
+    "    const item = templates.find((entry) => String(entry.id) === String(id));",
+    "    if (!item) { renderPage(); return toast('Modelo não encontrado', 'warning', 'A biblioteca foi atualizada; confira a lista atual.'); }",
+    "    const accepted = await confirmDialog({ title: 'Excluir modelo da biblioteca?', message: `O modelo “${item.title}” será removido da sua biblioteca. As aplicações já registradas nos prontuários serão preservadas.`, confirmText: 'Excluir modelo', danger: true });",
+    "    if (!accepted) return;",
+    "    const remaining = templates.filter((entry) => String(entry.id) !== String(id));",
+    "    const saved = await saveInterventionTemplates(state.user.id, remaining);",
     "    state.user = { ...state.user, user_metadata: { ...(state.user.user_metadata || {}), prisma_intervention_library: saved.templates } };",
     "    renderPage();",
-    "    toast('Modelo removido', 'success', 'Os registros vinculados aos alunos foram preservados.');",
-    "  } catch (error) { toast('Não foi possível excluir o modelo', 'error', error.message); }",
+    "    toast('Modelo excluído', 'success', 'O modelo foi removido da biblioteca. Os registros vinculados aos alunos foram preservados.');",
+    "  } catch (error) {",
+    "    console.error('[Prisma] Falha ao excluir modelo de intervenção:', error);",
+    "    toast('Não foi possível excluir o modelo', 'error', error?.message || 'Confira sua sessão e tente novamente.');",
+    "  }",
     "}",
     "",
     "async function showUseInterventionTemplate(id) {",
@@ -6985,7 +6989,23 @@ const SOURCES = {
     "    return;",
     "  }",
     "  popup.opener = null;",
-    "  popup.document.write(`<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><title>${escapeHTML(title)}</title><style>body{font-family:Arial,sans-serif;color:#222;padding:42px;max-width:850px;margin:auto}h1{font-size:20px}pre{font:14px/1.8 Arial,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}@media print{button{display:none}body{padding:0}}</style></head><body><button onclick=\"window.print()\">Imprimir / salvar em PDF</button><h1>${escapeHTML(title)}</h1><pre>${escapeHTML(documentText)}</pre><script>window.addEventListener('load',()=>window.setTimeout(()=>window.print(),300));<\\/script></body></html>`);",
+    "  popup.document.write(`<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><title>${escapeHTML(title)}</title><style>body{font-family:Arial,sans-serif;color:#222;padding:42px;max-width:850px;margin:auto}h1{font-size:20px}pre{font:14px/1.8 Arial,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}@media print{button{display:none}body{padding:0}}
+/* Ajuste visual: capas da biblioteca de atividades sem estourar os cards. */
+.activity-card-image-wrap{display:block;width:100%;height:132px;max-height:132px;overflow:hidden;border-radius:11px;background:var(--surface-soft,#f4f7f5);position:relative;flex:0 0 auto}
+.activity-card-image{display:block;width:100%;height:100%;max-width:100%;max-height:132px;object-fit:cover;object-position:center;border-radius:11px}
+.activity-card-image-wrap.is-image-broken{display:none}
+.activities-grid .activity-card{overflow:hidden;padding:16px;gap:9px}
+.admin-activity-row{overflow:hidden}
+.admin-activity-thumb{display:block;flex:0 0 88px;width:88px;height:66px;max-width:88px;max-height:66px;object-fit:cover;object-position:center;border-radius:9px;background:var(--surface-soft,#f4f7f5)}
+.admin-activity-thumb-empty{display:grid;place-items:center;color:var(--muted,#64748b);font-size:20px}
+.admin-activity-copy{flex:1;min-width:0;overflow-wrap:anywhere}
+.admin-activity-copy small{display:block;overflow-wrap:anywhere;word-break:break-word}
+.intervention-card-actions{display:flex!important;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+.intervention-card-actions .button,.intervention-card-actions .table-action{flex:0 0 auto;white-space:nowrap}
+.intervention-card-actions .delete-intervention-template-button{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:6px 10px;border:1px solid #e7b7b4;border-radius:9px;background:#fff7f6;color:#a12d27;font-size:12px;font-weight:700;cursor:pointer}
+.intervention-card-actions .delete-intervention-template-button:hover{background:#feeceb;border-color:#d9908b}
+@media(max-width:650px){.activity-card-image-wrap{height:112px;max-height:112px}.activity-card-image{max-height:112px}.activities-grid{grid-template-columns:minmax(0,1fr)}.admin-activity-thumb{flex-basis:72px;width:72px;height:58px;max-width:72px;max-height:58px}.intervention-card-actions{justify-content:flex-start;width:100%}.intervention-card-actions .button{width:auto;flex:0 1 auto}.intervention-card-actions .delete-intervention-template-button{flex:0 0 auto}}
+</style></head><body><button onclick=\"window.print()\">Imprimir / salvar em PDF</button><h1>${escapeHTML(title)}</h1><pre>${escapeHTML(documentText)}</pre><script>window.addEventListener('load',()=>window.setTimeout(()=>window.print(),300));<\\/script></body></html>`);",
     "  popup.document.close();",
     "}",
     "",
